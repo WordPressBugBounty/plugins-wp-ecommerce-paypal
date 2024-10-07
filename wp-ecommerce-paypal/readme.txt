@@ -14,7 +14,7 @@ Add a PayPal Buy Now Button to your website and start selling with PayPal and St
 
 == Description ==
 
-###  This plugin will allow you to sell products or services on your website using a PayPal and Stripe Buy Now Button.
+### Sell products or services on your site using a PayPal and Stripe Button
 
 Do you want to easily sell items or services your site? This is the plugin just for that. Setup is easy to connect to PayPal and Stripe. We’re also an official PayPal & Stripe Partner.
 
