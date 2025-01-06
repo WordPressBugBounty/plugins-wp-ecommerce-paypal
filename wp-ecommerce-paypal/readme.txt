@@ -4,7 +4,7 @@ Donate link: https://wpplugin.org/donate/
 Tags: PayPal, gateway, paypal button, ecommerce, shop
 Author URI: https://wpplugin.org
 Requires at least: 3.0
-Tested up to: 6.6
+Tested up to: 6.7
 Requires PHP: 5.4
 Stable tag: 1.9.1
 License: GPLv2 or later
