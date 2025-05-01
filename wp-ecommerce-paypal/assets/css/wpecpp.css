@@ -151,6 +151,17 @@
     color: red;
 }
 
+/* Error message for deleted buttons */
+.wpecpp-error {
+    color: #d63638;
+    background-color: #ffebe8;
+    border: 1px solid #d63638;
+    border-radius: 2px;
+    padding: 8px 12px;
+    margin: 5px 0;
+    display: inline-block;
+}
+
 /* Hosted Fields */
 .wpecpp-or {
     display: none;

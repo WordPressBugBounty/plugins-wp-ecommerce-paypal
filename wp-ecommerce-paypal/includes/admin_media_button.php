@@ -12,9 +12,9 @@ function wpecpp_insert_shortcode_button() {
 
     if ( !in_array( $pagenow, ['post.php', 'page.php', 'post-new.php', 'post-edit.php'] ) || $typenow === 'download' ) return;
 
-    echo '<a href="#TB_inline?width=600&height=500&inlineId=wpecpp_popup_container" title="PayPal / Stripe Button" class="button thickbox">
-        PayPal / Stripe Button
-    </a>';
+    echo '<a href="#TB_inline?width=600&height=500&inlineId=wpecpp_popup_container" title="' . __('PayPal / Stripe Button', 'wp-ecommerce-paypal') . '" class="button thickbox">' . 
+        __('PayPal / Stripe Button', 'wp-ecommerce-paypal') . 
+    '</a>';
 
 	// popup
 	add_action( 'admin_footer', 'wpecpp_insert_shortcode_popup_content' );
@@ -31,11 +31,11 @@ function wpecpp_insert_shortcode_popup_content() {
                 wpecpp_alignment = wpecpp_alignmentb == 'none' ? '' : ' align="' + wpecpp_alignmentb + '"';
 
             if (!wpecpp_scname.match(/\S/)) {
-                alert("Item Name is required.");
+                alert("<?php echo esc_js(__('Item Name is required.', 'wp-ecommerce-paypal')); ?>");
                 return false;
             }
             if (!wpecpp_scprice.match(/\S/)) {
-                alert("Item Price is required.");
+                alert("<?php echo esc_js(__('Item Price is required.', 'wp-ecommerce-paypal')); ?>");
                 return false;
             }
 
@@ -48,45 +48,45 @@ function wpecpp_insert_shortcode_popup_content() {
     </script>
 
     <div id="wpecpp_popup_container" style="display:none;">
-        <h2>Insert a Buy Now Button</h2>
+        <h2><?php _e('Insert a Buy Now Button', 'wp-ecommerce-paypal'); ?></h2>
         <table>
             <tr>
                 <td>
-                    Item Name:
+                    <?php _e('Item Name:', 'wp-ecommerce-paypal'); ?>
                 </td>
                 <td>
                     <input type="text" name="wpecpp_scname" id="wpecpp_scname" value="">
-                    The name of the item
+                    <?php _e('The name of the item', 'wp-ecommerce-paypal'); ?>
                 </td>
             </tr>
             <tr>
                 <td>
-                    Item Price:
+                    <?php _e('Item Price:', 'wp-ecommerce-paypal'); ?>
                 </td>
                 <td>
                     <input type="number" step="1" min="0" name="wpecpp_scprice" id="wpecpp_scprice" value="">
-                    Example format: 6.99
+                    <?php _e('Example format: 6.99', 'wp-ecommerce-paypal'); ?>
                 </td>
             </tr>
             <tr>
                 <td>
-                    Alignment:
+                    <?php _e('Alignment:', 'wp-ecommerce-paypal'); ?>
                 </td>
                 <td>
                     <select name="wpecpp_alignment" id="wpecpp_alignment">
                         <option value="none"></option>
-                        <option value="left">Left</option>
-                        <option value="center">Center</option>
-                        <option value="right">Right</option>
+                        <option value="left"><?php _e('Left', 'wp-ecommerce-paypal'); ?></option>
+                        <option value="center"><?php _e('Center', 'wp-ecommerce-paypal'); ?></option>
+                        <option value="right"><?php _e('Right', 'wp-ecommerce-paypal'); ?></option>
                     </select>
-                    Optional
+                    <?php _e('Optional', 'wp-ecommerce-paypal'); ?>
                 </td>
             </tr>
             <tr>
                 <td colspan="2">
                     <br />
                     <br />
-                    <input type="button" id="wpecpp-insert" class="button-primary" onclick="wpecpp_InsertShortcode();" value="Insert" />
+                    <input type="button" id="wpecpp-insert" class="button-primary" onclick="wpecpp_InsertShortcode();" value="<?php _e('Insert', 'wp-ecommerce-paypal'); ?>" />
                     <br />
                     <br />
                 </td>

@@ -6,7 +6,7 @@ add_action( 'wp_ajax_nopriv_wpecpp-ppcp-order-create', 'wpecpp_ppcp_order_create
 function wpecpp_ppcp_order_create_ajax() {
 	if ( !wp_verify_nonce( $_POST['nonce'], 'wpecpp-frontend-request' ) ) {
 		wp_send_json_error( [
-			'message' => __( 'The request has not been authenticated. Please reload the page and try again.' )
+			'message' => __( 'The request has not been authenticated. Please reload the page and try again.', 'wp-ecommerce-paypal' )
 		] );
 	}
 
@@ -15,6 +15,17 @@ function wpecpp_ppcp_order_create_ajax() {
 	$env = $mode === 1 ? 'sandbox' : 'live';
 	$onboarding = isset( $options['ppcp_onboarding'][$env] ) ? $options['ppcp_onboarding'][$env] : [];
 
+	// Create item array with the required fields
+	$item = [
+		'name' => sanitize_text_field( $_POST['name'] ),
+		'price' => floatval( $_POST['price'] )
+	];
+
+	// Add quantity if it's provided
+	if (!empty($_POST['quantity'])) {
+		$item['quantity'] = intval($_POST['quantity']);
+	}
+
 	$response = wp_remote_post(
 		WPECPP_FREE_PPCP_API . 'create-order',
 		[
@@ -22,12 +33,7 @@ function wpecpp_ppcp_order_create_ajax() {
 			'body' => [
 				'env' => $env,
 				'seller_id' => $onboarding['seller_id'],
-				'items' => [
-					[
-						'name' => sanitize_text_field( $_POST['name'] ),
-						'price' => floatval( $_POST['price'] )
-					]
-				],
+				'items' => [ $item ],
 				'currency' => wpecpp_currency_code_to_iso( $options['currency'] ),
 				'intent' => 'capture',
 				'address' => $options['address']
@@ -40,7 +46,7 @@ function wpecpp_ppcp_order_create_ajax() {
 
 	if ( empty( $data['success'] ) ) {
 		wp_send_json_error( [
-			'message' => !empty( $data['message'] ) ? $data['message'] : __( "Can't create an order." )
+			'message' => !empty( $data['message'] ) ? $data['message'] : __( "Can't create an order.", 'wp-ecommerce-paypal' )
 		] );
 	}
 
@@ -54,7 +60,7 @@ add_action( 'wp_ajax_nopriv_wpecpp-ppcp-order-finalize', 'wpecpp_ppcp_order_fina
 function wpecpp_ppcp_order_finalize_ajax() {
 	if ( !wp_verify_nonce( $_POST['nonce'], 'wpecpp-frontend-request' ) ) {
 		wp_send_json_error( [
-			'message' => __( 'The request has not been authenticated. Please reload the page and try again.' )
+			'message' => __( 'The request has not been authenticated. Please reload the page and try again.', 'wp-ecommerce-paypal' )
 		] );
 	}
 

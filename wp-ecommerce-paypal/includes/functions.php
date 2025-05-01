@@ -364,10 +364,7 @@ function wpecpp_stripe_account_data() {
 
 	if ( empty( $account_id ) || empty( $token ) ) return false;
 
-	$width = (int) $options['stripe_width'];
-	if ( $width < 160 ) {
-		$width = 160;
-	}
+	$width = absint( $options['stripe_width'] );
 
 	return [
 		'mode' => $mode,

@@ -1,0 +1,1275 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Easy PayPal & Stripe Buy Now Button\n"
+"POT-Creation-Date: 2025-04-30 19:18-0700\n"
+"PO-Revision-Date: 2025-04-18 16:20-0700\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_n;_x;_ex;_nx;_n_noop;_nx_noop;esc_attr__;esc_attr_e;esc_attr_x;esc_html__;esc_html_e;esc_html_x;translate_nooped_plural\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/admin_media_button.php:15 includes/admin_media_button.php:16
+msgid "PayPal / Stripe Button"
+msgstr ""
+
+#: includes/admin_media_button.php:34
+msgid "Item Name is required."
+msgstr ""
+
+#: includes/admin_media_button.php:38
+msgid "Item Price is required."
+msgstr ""
+
+#: includes/admin_media_button.php:51
+msgid "Insert a Buy Now Button"
+msgstr ""
+
+#: includes/admin_media_button.php:55
+msgid "Item Name:"
+msgstr ""
+
+#: includes/admin_media_button.php:59
+msgid "The name of the item"
+msgstr ""
+
+#: includes/admin_media_button.php:64
+msgid "Item Price:"
+msgstr ""
+
+#: includes/admin_media_button.php:68 includes/shortcode_manager.php:111
+msgid "Example format: 6.99"
+msgstr ""
+
+#: includes/admin_media_button.php:73
+msgid "Alignment:"
+msgstr ""
+
+#: includes/admin_media_button.php:78 includes/shortcode_manager.php:129
+msgid "Left"
+msgstr ""
+
+#: includes/admin_media_button.php:79 includes/shortcode_manager.php:130
+msgid "Center"
+msgstr ""
+
+#: includes/admin_media_button.php:80 includes/shortcode_manager.php:131
+msgid "Right"
+msgstr ""
+
+#: includes/admin_media_button.php:82 includes/admin_settings_page.php:490
+#: includes/admin_settings_page.php:504
+msgid "Optional"
+msgstr ""
+
+#: includes/admin_media_button.php:89
+msgid "Insert"
+msgstr ""
+
+#: includes/admin_menu.php:15 includes/admin_notices.php:42
+#: includes/admin_notices.php:109
+msgid "Easy PayPal & Stripe Button"
+msgstr ""
+
+#: includes/admin_menu.php:16
+msgid "PayPal & Stripe"
+msgstr ""
+
+#: includes/admin_menu.php:27 includes/admin_menu.php:28
+#: includes/shortcode_manager.php:11 includes/shortcode_manager.php:13
+msgid "Buttons"
+msgstr ""
+
+#: includes/admin_menu.php:37 includes/admin_menu.php:38
+#: wp-ecommerce-paypal.php:217
+msgid "Settings"
+msgstr ""
+
+#: includes/admin_menu.php:47 includes/admin_menu.php:48
+#: includes/shortcode_manager.php:16
+msgid "Add New Button"
+msgstr ""
+
+#: includes/admin_notices.php:16
+msgid "Click here to view the plugin settings"
+msgstr ""
+
+#: includes/admin_notices.php:41 includes/admin_notices.php:108
+msgid "Important"
+msgstr ""
+
+#: includes/admin_notices.php:43
+msgid "now uses Stripe Connect."
+msgstr ""
+
+#: includes/admin_notices.php:44
+msgid "Stripe Connect improves security and allows for easier setup."
+msgstr ""
+
+#: includes/admin_notices.php:45
+msgid "If you use Stripe, please use Stripe Connect."
+msgstr ""
+
+#: includes/admin_notices.php:46
+msgid "Have questions: see the"
+msgstr ""
+
+#: includes/admin_notices.php:47 includes/stripe_connect.php:116
+msgid "documentation"
+msgstr ""
+
+#: includes/admin_notices.php:48 includes/stripe_connect.php:111
+msgid "Connect with Stripe"
+msgstr ""
+
+#: includes/admin_notices.php:49
+msgid "WPPlugin LLC is an offical Stripe Partner. Pay as you go pricing: 2% per-transaction fee + Stripe fees."
+msgstr ""
+
+#: includes/admin_notices.php:88
+msgid "An error occurred while interacting with our Stripe Connect interface. Please notify the author of the plugin."
+msgstr ""
+
+#: includes/admin_notices.php:110
+msgid "now uses PayPal Commerce Platform."
+msgstr ""
+
+#: includes/admin_notices.php:111
+msgid "PayPal Standard is now a Legacy product."
+msgstr ""
+
+#: includes/admin_notices.php:112
+msgid "If you use PayPal, please update to PayPal Commerce Platform."
+msgstr ""
+
+#: includes/admin_notices.php:113
+msgid "Get Started"
+msgstr ""
+
+#: includes/admin_notices.php:114
+msgid "WPPlugin LLC is an offical PayPal Partner. Pay as you go pricing: 2% per-transaction fee + PayPal fees."
+msgstr ""
+
+#: includes/admin_settings_page.php:15
+msgid "You do not have sufficient permissions to access this page. Please sign in as an administrator."
+msgstr ""
+
+#: includes/admin_settings_page.php:47
+msgid "PayPal & Stripe Settings"
+msgstr ""
+
+#: includes/admin_settings_page.php:50
+msgid "Save Settings"
+msgstr ""
+
+#: includes/admin_settings_page.php:56
+msgid "Settings Updated."
+msgstr ""
+
+#: includes/admin_settings_page.php:58
+msgid "Unable to update settings."
+msgstr ""
+
+#: includes/admin_settings_page.php:100 includes/admin_settings_page.php:112
+msgid "Getting Started"
+msgstr ""
+
+#: includes/admin_settings_page.php:101
+msgid "Language & Currency"
+msgstr ""
+
+#: includes/admin_settings_page.php:102 includes/admin_settings_page.php:887
+msgid "PayPal"
+msgstr ""
+
+#: includes/admin_settings_page.php:103
+msgid "Stripe"
+msgstr ""
+
+#: includes/admin_settings_page.php:104
+msgid "Actions"
+msgstr ""
+
+#: includes/admin_settings_page.php:105
+msgid "Shipping"
+msgstr ""
+
+#: includes/admin_settings_page.php:115
+msgid "How to use this plugin"
+msgstr ""
+
+#: includes/admin_settings_page.php:117
+msgid "On the Buttons page you can make PayPal and Stripe buttons. It will show you the shortcode for each button. Place these shortcodes in any page or post to display the payment button for your customers."
+msgstr ""
+
+#: includes/admin_settings_page.php:119
+msgid "Alterntive method: In a page or post editor, you will see a new button called 'PayPal / Stripe Button' located above the text area beside the 'Add Media' button. By using this, you can create shortcodes that will show up as a 'Buy Now' button on your site."
+msgstr ""
+
+#: includes/admin_settings_page.php:122
+msgid "You can put the 'Buy Now' buttons as many times on a page or post as you want; there is no limit. If you want to remove a 'Buy Now' button, just remove the shortcode text on your page or post."
+msgstr ""
+
+#: includes/admin_settings_page.php:124
+msgid "Help & Documentation"
+msgstr ""
+
+#: includes/admin_settings_page.php:125
+msgid "Help and Documentation manuals can be found on our website at"
+msgstr ""
+
+#: includes/admin_settings_page.php:126
+msgid "If you have are having a problem, contact support at"
+msgstr ""
+
+#: includes/admin_settings_page.php:131
+msgid "WPPlugin LLC is an offical PayPal & Stripe Partner. Various trademarks held by their respective owners."
+msgstr ""
+
+#: includes/admin_settings_page.php:139
+msgid "Language & Currency Settings"
+msgstr ""
+
+#: includes/admin_settings_page.php:145
+msgid "Language Settings"
+msgstr ""
+
+#: includes/admin_settings_page.php:150
+msgid "Language:"
+msgstr ""
+
+#: includes/admin_settings_page.php:154
+msgid "Default"
+msgstr ""
+
+#: includes/admin_settings_page.php:155
+msgid "Danish"
+msgstr ""
+
+#: includes/admin_settings_page.php:156
+msgid "Dutch"
+msgstr ""
+
+#: includes/admin_settings_page.php:157
+msgid "English"
+msgstr ""
+
+#: includes/admin_settings_page.php:158
+msgid "English - UK"
+msgstr ""
+
+#: includes/admin_settings_page.php:159
+msgid "French"
+msgstr ""
+
+#: includes/admin_settings_page.php:160
+msgid "German"
+msgstr ""
+
+#: includes/admin_settings_page.php:161
+msgid "Hebrew"
+msgstr ""
+
+#: includes/admin_settings_page.php:162
+msgid "Italian"
+msgstr ""
+
+#: includes/admin_settings_page.php:163
+msgid "Japanese"
+msgstr ""
+
+#: includes/admin_settings_page.php:164
+msgid "Norwegian"
+msgstr ""
+
+#: includes/admin_settings_page.php:165
+msgid "Polish"
+msgstr ""
+
+#: includes/admin_settings_page.php:166
+msgid "Portuguese"
+msgstr ""
+
+#: includes/admin_settings_page.php:167
+msgid "Russian"
+msgstr ""
+
+#: includes/admin_settings_page.php:168
+msgid "Spanish"
+msgstr ""
+
+#: includes/admin_settings_page.php:169
+msgid "Swedish"
+msgstr ""
+
+#: includes/admin_settings_page.php:170
+msgid "Simplified Chinese -China only"
+msgstr ""
+
+#: includes/admin_settings_page.php:171
+msgid "Traditional Chinese - Hong Kong only"
+msgstr ""
+
+#: includes/admin_settings_page.php:172
+msgid "Traditional Chinese - Taiwan only"
+msgstr ""
+
+#: includes/admin_settings_page.php:173
+msgid "Turkish"
+msgstr ""
+
+#: includes/admin_settings_page.php:174
+msgid "Thai"
+msgstr ""
+
+#: includes/admin_settings_page.php:178
+msgid "PayPal currently supports 18 languages."
+msgstr ""
+
+#: includes/admin_settings_page.php:184
+msgid "Currency Settings"
+msgstr ""
+
+#: includes/admin_settings_page.php:189
+msgid "Currency:"
+msgstr ""
+
+#: includes/admin_settings_page.php:193
+msgid "Australian Dollar - AUD"
+msgstr ""
+
+#: includes/admin_settings_page.php:194
+msgid "Brazilian Real - BRL"
+msgstr ""
+
+#: includes/admin_settings_page.php:195
+msgid "Canadian Dollar - CAD"
+msgstr ""
+
+#: includes/admin_settings_page.php:196
+msgid "Czech Koruna - CZK"
+msgstr ""
+
+#: includes/admin_settings_page.php:197
+msgid "Danish Krone - DKK"
+msgstr ""
+
+#: includes/admin_settings_page.php:198
+msgid "Euro - EUR"
+msgstr ""
+
+#: includes/admin_settings_page.php:199
+msgid "Hong Kong Dollar - HKD"
+msgstr ""
+
+#: includes/admin_settings_page.php:200
+msgid "Hungarian Forint - HUF"
+msgstr ""
+
+#: includes/admin_settings_page.php:201
+msgid "Israeli New Sheqel - ILS"
+msgstr ""
+
+#: includes/admin_settings_page.php:202
+msgid "Japanese Yen - JPY"
+msgstr ""
+
+#: includes/admin_settings_page.php:203
+msgid "Malaysian Ringgit - MYR"
+msgstr ""
+
+#: includes/admin_settings_page.php:204
+msgid "Mexican Peso - MXN"
+msgstr ""
+
+#: includes/admin_settings_page.php:205
+msgid "Norwegian Krone - NOK"
+msgstr ""
+
+#: includes/admin_settings_page.php:206
+msgid "New Zealand Dollar - NZD"
+msgstr ""
+
+#: includes/admin_settings_page.php:207
+msgid "Philippine Peso - PHP"
+msgstr ""
+
+#: includes/admin_settings_page.php:208
+msgid "Polish Zloty - PLN"
+msgstr ""
+
+#: includes/admin_settings_page.php:209
+msgid "Pound Sterling - GBP"
+msgstr ""
+
+#: includes/admin_settings_page.php:210
+msgid "Russian Ruble - RUB"
+msgstr ""
+
+#: includes/admin_settings_page.php:211
+msgid "Singapore Dollar - SGD"
+msgstr ""
+
+#: includes/admin_settings_page.php:212
+msgid "Swedish Krona - SEK"
+msgstr ""
+
+#: includes/admin_settings_page.php:213
+msgid "Swiss Franc - CHF"
+msgstr ""
+
+#: includes/admin_settings_page.php:214
+msgid "Taiwan New Dollar - TWD"
+msgstr ""
+
+#: includes/admin_settings_page.php:215
+msgid "Thai Baht - THB"
+msgstr ""
+
+#: includes/admin_settings_page.php:216
+msgid "Turkish Lira - TRY"
+msgstr ""
+
+#: includes/admin_settings_page.php:217
+msgid "U.S. Dollar - USD"
+msgstr ""
+
+#: includes/admin_settings_page.php:221
+msgid "PayPal currently supports 25 currencies."
+msgstr ""
+
+#: includes/admin_settings_page.php:232
+msgid "PayPal Settings"
+msgstr ""
+
+#: includes/admin_settings_page.php:238
+msgid "PayPal Account"
+msgstr ""
+
+#: includes/admin_settings_page.php:259
+msgid "PayPal Standard"
+msgstr ""
+
+#: includes/admin_settings_page.php:274
+msgid "Live Account:"
+msgstr ""
+
+#: includes/admin_settings_page.php:285
+msgid "Sandbox Account:"
+msgstr ""
+
+#: includes/admin_settings_page.php:296
+msgid "PayPal Standard is now deprecated. You cannot modify your Standard settings. We highly recommend using PayPal Commerce."
+msgstr ""
+
+#: includes/admin_settings_page.php:303
+msgid "PayPal Options"
+msgstr ""
+
+#: includes/admin_settings_page.php:308 includes/admin_settings_page.php:412
+msgid "Sandbox Mode:"
+msgstr ""
+
+#: includes/admin_settings_page.php:313 includes/admin_settings_page.php:417
+msgid "On (Sandbox mode)"
+msgstr ""
+
+#: includes/admin_settings_page.php:319 includes/admin_settings_page.php:422
+msgid "Off (Live mode)"
+msgstr ""
+
+#: includes/admin_settings_page.php:325 includes/shortcode_manager.php:137
+msgid "Disable PayPal:"
+msgstr ""
+
+#: includes/admin_settings_page.php:330 includes/admin_settings_page.php:433
+msgid "No"
+msgstr ""
+
+#: includes/admin_settings_page.php:336 includes/admin_settings_page.php:438
+msgid "Yes"
+msgstr ""
+
+#: includes/admin_settings_page.php:344
+msgid "Payment Action:"
+msgstr ""
+
+#: includes/admin_settings_page.php:349
+msgid "Sale (Default)"
+msgstr ""
+
+#: includes/admin_settings_page.php:355
+msgid "Authorize"
+msgstr ""
+
+#: includes/admin_settings_page.php:355
+msgid "Learn more"
+msgstr ""
+
+#: includes/admin_settings_page.php:368
+msgid "Stripe Settings"
+msgstr ""
+
+#: includes/admin_settings_page.php:374
+msgid "Stripe Account"
+msgstr ""
+
+#: includes/admin_settings_page.php:384 includes/admin_settings_page.php:625
+msgid "Connection status:"
+msgstr ""
+
+#: includes/admin_settings_page.php:397 includes/admin_settings_page.php:937
+msgid "Width:"
+msgstr ""
+
+#: includes/admin_settings_page.php:402
+msgid "Button width in pixels"
+msgstr ""
+
+#: includes/admin_settings_page.php:428 includes/shortcode_manager.php:148
+msgid "Disable Stripe:"
+msgstr ""
+
+#: includes/admin_settings_page.php:449 includes/admin_settings_page.php:455
+msgid "Action Settings"
+msgstr ""
+
+#: includes/admin_settings_page.php:460
+msgid "Button opens in:"
+msgstr ""
+
+#: includes/admin_settings_page.php:465
+msgid "Same window"
+msgstr ""
+
+#: includes/admin_settings_page.php:470
+msgid "New window"
+msgstr ""
+
+#: includes/admin_settings_page.php:477
+msgid "Note: PayPal can only open in a popup window."
+msgstr ""
+
+#: includes/admin_settings_page.php:487
+msgid "Default Cancel URL:"
+msgstr ""
+
+#: includes/admin_settings_page.php:496
+msgid "If the customer goes to PayPal and clicks the cancel button, where do they go. Example:"
+msgstr ""
+
+#: includes/admin_settings_page.php:496
+msgid "cancel. Max length: 1,024."
+msgstr ""
+
+#: includes/admin_settings_page.php:501
+msgid "Default Return URL:"
+msgstr ""
+
+#: includes/admin_settings_page.php:510
+msgid "If the customer goes to PayPal and successfully pays, where are they redirected to after. Example:"
+msgstr ""
+
+#: includes/admin_settings_page.php:510
+msgid "thankyou. Max length: 1,024."
+msgstr ""
+
+#: includes/admin_settings_page.php:520
+msgid "Shipping Settings"
+msgstr ""
+
+#: includes/admin_settings_page.php:526
+msgid "Shipping Options"
+msgstr ""
+
+#: includes/admin_settings_page.php:531
+msgid "Require Shipping Address:"
+msgstr ""
+
+#: includes/admin_settings_page.php:541
+msgid "Prompt for an address, but do not require one (default)"
+msgstr ""
+
+#: includes/admin_settings_page.php:542 includes/admin_settings_page.php:545
+msgid "Do not prompt for an address"
+msgstr ""
+
+#: includes/admin_settings_page.php:543 includes/admin_settings_page.php:546
+msgid "Prompt for an address, and require one"
+msgstr ""
+
+#: includes/admin_settings_page.php:551
+msgid "Optional - Should the customer be asked for a shipping address at PayPal checkout."
+msgstr ""
+
+#: includes/admin_settings_page.php:562
+msgid "PayPal Buy Now Button Pro"
+msgstr ""
+
+#: includes/admin_settings_page.php:566
+msgid "With the Pro version you'll <br /> be able to:"
+msgstr ""
+
+#: includes/admin_settings_page.php:568
+msgid "No PayPal 2% per-transaction fee"
+msgstr ""
+
+#: includes/admin_settings_page.php:569
+msgid "No Stripe 2% per-transaction fee"
+msgstr ""
+
+#: includes/admin_settings_page.php:570
+msgid "View Sales In Your Dashboard"
+msgstr ""
+
+#: includes/admin_settings_page.php:571
+msgid "Send out Email Notifications"
+msgstr ""
+
+#: includes/admin_settings_page.php:572
+msgid "Inventory Management"
+msgstr ""
+
+#: includes/admin_settings_page.php:573
+msgid "Separate PayPal Accounts"
+msgstr ""
+
+#: includes/admin_settings_page.php:574
+msgid "Add Discounts"
+msgstr ""
+
+#: includes/admin_settings_page.php:575
+msgid "Fast & Professional Support"
+msgstr ""
+
+#: includes/admin_settings_page.php:577
+msgid "Developed by an official PayPal and Stripe Partner"
+msgstr ""
+
+#: includes/admin_settings_page.php:578
+msgid "Learn More"
+msgstr ""
+
+#: includes/admin_settings_page.php:584
+msgid "Quick Links"
+msgstr ""
+
+#: includes/admin_settings_page.php:588
+msgid "Support Forum"
+msgstr ""
+
+#: includes/admin_settings_page.php:589
+msgid "FAQ"
+msgstr ""
+
+#: includes/admin_settings_page.php:590
+msgid "PayPal Button Pro"
+msgstr ""
+
+#: includes/admin_settings_page.php:634 includes/stripe_connect.php:79
+msgid "Administrator (Owner)"
+msgstr ""
+
+#: includes/admin_settings_page.php:636
+msgid "Pay as you go pricing: 2% per-transaction fee + PayPal fees."
+msgstr ""
+
+#: includes/admin_settings_page.php:640
+msgid "Your PayPal account is connected in"
+msgstr ""
+
+#: includes/admin_settings_page.php:640
+msgid "mode."
+msgstr ""
+
+#: includes/admin_settings_page.php:642 includes/stripe_connect.php:88
+msgid "Connect in"
+msgstr ""
+
+#: includes/admin_settings_page.php:642 includes/stripe_connect.php:87
+msgid "mode"
+msgstr ""
+
+#: includes/admin_settings_page.php:643 includes/public_shortcode.php:214
+#: includes/stripe_connect.php:91
+msgid "or"
+msgstr ""
+
+#: includes/admin_settings_page.php:643 includes/stripe_connect.php:93
+msgid "disconnect this account"
+msgstr ""
+
+#: includes/admin_settings_page.php:648
+msgid "There were errors connecting your PayPal account. Resolve them in your account settings, by contacting support or by reconnecting your PayPal account."
+msgstr ""
+
+#: includes/admin_settings_page.php:652
+msgid "See below for more details."
+msgstr ""
+
+#: includes/admin_settings_page.php:662 includes/stripe_connect.php:102
+msgid "Please review the warnings below and resolve them in your account settings or by contacting support."
+msgstr ""
+
+#: includes/admin_settings_page.php:673
+msgid "PayPal account settings"
+msgstr ""
+
+#: includes/admin_settings_page.php:674
+msgid "PayPal support"
+msgstr ""
+
+#: includes/admin_settings_page.php:686
+msgid "Payments Methods Accepted"
+msgstr ""
+
+#: includes/admin_settings_page.php:691
+msgid "PayPal:"
+msgstr ""
+
+#: includes/admin_settings_page.php:696 includes/admin_settings_page.php:713
+#: includes/admin_settings_page.php:730 includes/admin_settings_page.php:747
+#: includes/admin_settings_page.php:764 includes/admin_settings_page.php:783
+msgid "On"
+msgstr ""
+
+#: includes/admin_settings_page.php:702 includes/admin_settings_page.php:719
+#: includes/admin_settings_page.php:736 includes/admin_settings_page.php:753
+#: includes/admin_settings_page.php:770 includes/admin_settings_page.php:789
+msgid "Off"
+msgstr ""
+
+#: includes/admin_settings_page.php:708
+msgid "PayPal PayLater:"
+msgstr ""
+
+#: includes/admin_settings_page.php:725
+msgid "Venmo:"
+msgstr ""
+
+#: includes/admin_settings_page.php:742
+msgid "Local Alternative Payment Methods:"
+msgstr ""
+
+#: includes/admin_settings_page.php:759
+msgid "Credit & Debit Cards:"
+msgstr ""
+
+#: includes/admin_settings_page.php:778
+msgid "Advanced Credit & Debit Cards (ACDC):"
+msgstr ""
+
+#: includes/admin_settings_page.php:795
+msgid "ACDC Button text:"
+msgstr ""
+
+#: includes/admin_settings_page.php:800
+msgid "Payment button text"
+msgstr ""
+
+#: includes/admin_settings_page.php:808
+msgid "PayPal Checkout Buttons"
+msgstr ""
+
+#: includes/admin_settings_page.php:813
+msgid "Layout:"
+msgstr ""
+
+#: includes/admin_settings_page.php:818
+msgid "Horizontal"
+msgstr ""
+
+#: includes/admin_settings_page.php:824
+msgid "Vertical"
+msgstr ""
+
+#: includes/admin_settings_page.php:830
+msgid "Color:"
+msgstr ""
+
+#: includes/admin_settings_page.php:835
+msgid "Gold"
+msgstr ""
+
+#: includes/admin_settings_page.php:841
+msgid "Blue"
+msgstr ""
+
+#: includes/admin_settings_page.php:847
+msgid "Black"
+msgstr ""
+
+#: includes/admin_settings_page.php:853
+msgid "Silver"
+msgstr ""
+
+#: includes/admin_settings_page.php:859
+msgid "White"
+msgstr ""
+
+#: includes/admin_settings_page.php:865
+msgid "Shape:"
+msgstr ""
+
+#: includes/admin_settings_page.php:870
+msgid "Rectangle"
+msgstr ""
+
+#: includes/admin_settings_page.php:876
+msgid "Pill"
+msgstr ""
+
+#: includes/admin_settings_page.php:882
+msgid "Label:"
+msgstr ""
+
+#: includes/admin_settings_page.php:893
+msgid "Pay with"
+msgstr ""
+
+#: includes/admin_settings_page.php:899
+msgid "Subscribe"
+msgstr ""
+
+#: includes/admin_settings_page.php:905
+msgid "Checkout"
+msgstr ""
+
+#: includes/admin_settings_page.php:911
+msgid "Buy Now"
+msgstr ""
+
+#: includes/admin_settings_page.php:922
+msgid "Height:"
+msgstr ""
+
+#: includes/admin_settings_page.php:927
+msgid "25 - 55, a value around 40 is recommended"
+msgstr ""
+
+#: includes/admin_settings_page.php:942
+msgid "Max buttons width in pixels"
+msgstr ""
+
+#: includes/admin_settings_page.php:963
+msgid "PayPal: The all-in-one checkout solution"
+msgstr ""
+
+#: includes/admin_settings_page.php:965
+msgid "Help drive conversion by offering customers a seamless checkout experience"
+msgstr ""
+
+#: includes/admin_settings_page.php:966
+msgid "Securely accepts all major credit/debit cards and local payment methods with the strength of the PayPal network"
+msgstr ""
+
+#: includes/admin_settings_page.php:967
+msgid "You only pay the standard PayPal fees + 2%."
+msgstr ""
+
+#: includes/admin_settings_page.php:973
+msgid "Get started"
+msgstr ""
+
+#: includes/admin_settings_page.php:976
+msgid "View our simple and transparent pricing"
+msgstr ""
+
+#: includes/admin_settings_page.php:987
+msgid "Setup PayPal Account"
+msgstr ""
+
+#: includes/admin_settings_page.php:991
+msgid "Select your country"
+msgstr ""
+
+#: includes/admin_settings_page.php:994
+msgid "United States"
+msgstr ""
+
+#: includes/admin_settings_page.php:995
+msgid "Australia"
+msgstr ""
+
+#: includes/admin_settings_page.php:996
+msgid "Canada"
+msgstr ""
+
+#: includes/admin_settings_page.php:997
+msgid "United Kingdom"
+msgstr ""
+
+#: includes/admin_settings_page.php:998
+msgid "Germany"
+msgstr ""
+
+#: includes/admin_settings_page.php:999
+msgid "France"
+msgstr ""
+
+#: includes/admin_settings_page.php:1000
+msgid "Italy"
+msgstr ""
+
+#: includes/admin_settings_page.php:1001
+msgid "Spain"
+msgstr ""
+
+#: includes/admin_settings_page.php:1002 wp-ecommerce-paypal.php:266
+msgid "Other"
+msgstr ""
+
+#: includes/admin_settings_page.php:1008
+msgid "Accept PayPal"
+msgstr ""
+
+#: includes/admin_settings_page.php:1013
+msgid "PayPal does not currently support PayPal Advanced Card Payments in your country."
+msgstr ""
+
+#: includes/admin_settings_page.php:1014
+msgid "Accept Credit and Debit Card Payments with PayPal"
+msgstr ""
+
+#: includes/admin_settings_page.php:1016
+msgid "Direct Credit Card option will require a PayPal Business account and additional vetting."
+msgstr ""
+
+#: includes/admin_settings_page.php:1021
+msgid "Sandbox"
+msgstr ""
+
+#: includes/admin_settings_page.php:1048
+msgid "Connect"
+msgstr ""
+
+#: includes/admin_settings_page.php:1049 wp-ecommerce-paypal.php:274
+msgid "Cancel"
+msgstr ""
+
+#: includes/ppcp.php:130 includes/ppcp_frontend.php:9
+#: includes/ppcp_frontend.php:63
+msgid "The request has not been authenticated. Please reload the page and try again."
+msgstr ""
+
+#: includes/ppcp.php:141 includes/ppcp.php:163
+msgid "An error occurred while processing your account disconnection request. Please contact our support service."
+msgstr ""
+
+#: includes/ppcp_frontend.php:49
+msgid "Can't create an order."
+msgstr ""
+
+#: includes/public_shortcode.php:35
+msgid "This payment button was removed. Please contact the website owner."
+msgstr ""
+
+#: includes/public_shortcode.php:93
+msgid "No payment methods are enabled for this button."
+msgstr ""
+
+#: includes/public_shortcode.php:95
+msgid "(Please enter your Payment methods data on the settings pages.)"
+msgstr ""
+
+#: includes/public_shortcode.php:109
+msgid "Make your payments with PayPal. It is free, secure, effective."
+msgstr ""
+
+#: includes/public_shortcode.php:128
+msgid "The payment was successful"
+msgstr ""
+
+#: includes/public_shortcode.php:131 includes/public_shortcode.php:332
+msgid "The payment was cancelled."
+msgstr ""
+
+#: includes/public_shortcode.php:133
+msgid "An unknown payment error has occurred. Please try again"
+msgstr ""
+
+#: includes/public_shortcode.php:139
+msgid "Pay with Stripe"
+msgstr ""
+
+#: includes/public_shortcode.php:247 includes/public_shortcode.php:248
+msgid "An error occurred while connecting PayPal SDK. Check the plugin settings."
+msgstr ""
+
+#: includes/public_shortcode.php:299 includes/public_shortcode.php:422
+msgid "An unknown error occurred while creating the order. Please reload the page and try again."
+msgstr ""
+
+#: includes/public_shortcode.php:378
+msgid "Card Number"
+msgstr ""
+
+#: includes/public_shortcode.php:382
+msgid "Expiration"
+msgstr ""
+
+#: includes/public_shortcode.php:386
+msgid "CVV"
+msgstr ""
+
+#: includes/public_shortcode.php:390
+msgid "Billing zip code / Postal code"
+msgstr ""
+
+#: includes/public_shortcode.php:471
+msgid "Please correct the errors in the fields above."
+msgstr ""
+
+#: includes/public_shortcode.php:557
+msgid "Site admin"
+msgstr ""
+
+#: includes/public_shortcode.php:557
+msgid "an error was detected in the plugin settings."
+msgstr ""
+
+#: includes/public_shortcode.php:557
+msgid "Please check the PayPal connection and product settings (price, name, etc.)"
+msgstr ""
+
+#: includes/shortcode_manager.php:12
+msgid "Button"
+msgstr ""
+
+#: includes/shortcode_manager.php:14
+msgid "PayPal Button"
+msgstr ""
+
+#: includes/shortcode_manager.php:15
+msgid "Add New"
+msgstr ""
+
+#: includes/shortcode_manager.php:17
+msgid "New Button"
+msgstr ""
+
+#: includes/shortcode_manager.php:18
+msgid "Edit Button"
+msgstr ""
+
+#: includes/shortcode_manager.php:19
+msgid "View Button"
+msgstr ""
+
+#: includes/shortcode_manager.php:20
+msgid "All Buttons"
+msgstr ""
+
+#: includes/shortcode_manager.php:21
+msgid "Search Buttons"
+msgstr ""
+
+#: includes/shortcode_manager.php:22
+msgid "No Buttons found"
+msgstr ""
+
+#: includes/shortcode_manager.php:23
+msgid "No Buttons found in trash"
+msgstr ""
+
+#: includes/shortcode_manager.php:51
+msgid "Button Settings"
+msgstr ""
+
+#: includes/shortcode_manager.php:60 includes/shortcode_manager.php:285
+msgid "Shortcode"
+msgstr ""
+
+#: includes/shortcode_manager.php:71
+msgid "Save"
+msgstr ""
+
+#: includes/shortcode_manager.php:107 includes/shortcode_manager.php:283
+msgid "Price"
+msgstr ""
+
+#: includes/shortcode_manager.php:111
+msgid "Minimum price is 1.00"
+msgstr ""
+
+#: includes/shortcode_manager.php:116 includes/shortcode_manager.php:284
+msgid "Quantity"
+msgstr ""
+
+#: includes/shortcode_manager.php:120
+msgid "Leave blank to not use quantity. Whole numbers only."
+msgstr ""
+
+#: includes/shortcode_manager.php:125
+msgid "Alignment"
+msgstr ""
+
+#: includes/shortcode_manager.php:166
+msgid "Use this shortcode to display the button on your site:"
+msgstr ""
+
+#: includes/shortcode_manager.php:170 includes/shortcode_manager.php:315
+msgid "Copy"
+msgstr ""
+
+#: includes/shortcode_manager.php:192
+msgid "Delete Permanently"
+msgstr ""
+
+#: includes/shortcode_manager.php:194
+msgid "Move to Trash"
+msgstr ""
+
+#: includes/shortcode_manager.php:209
+msgid "Publish"
+msgstr ""
+
+#: includes/shortcode_manager.php:210
+msgid "Save Button"
+msgstr ""
+
+#: includes/shortcode_manager.php:215
+msgid "Update"
+msgstr ""
+
+#: includes/shortcode_manager.php:216
+msgid "Update Button"
+msgstr ""
+
+#: includes/shortcode_manager.php:282
+msgid "Product"
+msgstr ""
+
+#: includes/shortcode_manager.php:328
+msgid "price"
+msgstr ""
+
+#: includes/shortcode_manager.php:329
+msgid "quantity"
+msgstr ""
+
+#: includes/shortcode_manager.php:372
+msgid "Button name is required."
+msgstr ""
+
+#: includes/shortcode_manager.php:415
+msgid "Please enter a valid name and price."
+msgstr ""
+
+#: includes/stripe_connect.php:80
+msgid "Pay as you go pricing: 2% per-transaction fee + Stripe fees."
+msgstr ""
+
+#: includes/stripe_connect.php:85
+msgid "Your Stripe account is connected in"
+msgstr ""
+
+#: includes/stripe_connect.php:105
+msgid "Can't read connected account email address"
+msgstr ""
+
+#: includes/stripe_connect.php:115
+#, php-format
+msgid ""
+"You only pay the standard Stripe fees + 2%%. Have questions about connecting with Stripe?\n"
+"\t\t\tPlease see the"
+msgstr ""
+
+#: includes/stripe_connect.php:179 includes/stripe_connect.php:216
+msgid "Security check failed"
+msgstr ""
+
+#: includes/stripe_connect.php:253
+msgid "Security error. The payment has not been made. Please reload the page and try again."
+msgstr ""
+
+#: includes/stripe_connect.php:262
+msgid "Stripe connection error. Please contact the site administrator."
+msgstr ""
+
+#: includes/stripe_connect.php:328
+msgid "An unexpected error occurred. Please try again."
+msgstr ""
+
+#: wp-ecommerce-paypal.php:93
+msgid "PLACE ORDER"
+msgstr ""
+
+#: wp-ecommerce-paypal.php:215
+msgid "Support"
+msgstr ""
+
+#: wp-ecommerce-paypal.php:216
+msgid "Pro Version"
+msgstr ""
+
+#: wp-ecommerce-paypal.php:260
+msgid "I upgraded to the Pro version"
+msgstr ""
+
+#: wp-ecommerce-paypal.php:261
+msgid "I no longer need the plugin"
+msgstr ""
+
+#: wp-ecommerce-paypal.php:262
+msgid "I found a better plugin"
+msgstr ""
+
+#: wp-ecommerce-paypal.php:263
+msgid "The plugin is not working"
+msgstr ""
+
+#: wp-ecommerce-paypal.php:264
+msgid "The fees are too high"
+msgstr ""
+
+#: wp-ecommerce-paypal.php:265
+msgid "It's a temporary deactivation"
+msgstr ""
+
+#: wp-ecommerce-paypal.php:269
+msgid "Easy PayPal & Stripe Button Deactivation"
+msgstr ""
+
+#: wp-ecommerce-paypal.php:270
+msgid "If you have a moment, please let us know why you are deactivating. All submissions are anonymous and we only use this feedback to improve this plugin."
+msgstr ""
+
+#: wp-ecommerce-paypal.php:271
+msgid "Please tell us more..."
+msgstr ""
+
+#: wp-ecommerce-paypal.php:272
+msgid "Skip & Deactivate"
+msgstr ""
+
+#: wp-ecommerce-paypal.php:273
+msgid "Submit & Deactivate"
+msgstr ""
+
+#: wp-ecommerce-paypal.php:275
+msgid "What is the name of the plugin?"
+msgstr ""
+
+#: wp-ecommerce-paypal.php:276
+msgid "We're sorry to hear that. Can you describe the issue?"
+msgstr ""
+
+#: wp-ecommerce-paypal.php:277
+msgid "Error: Please complete the required field."
+msgstr ""
+
+#: wp-ecommerce-paypal.php:325
+#, php-format
+msgid "Thank you for installing Easy PayPal & Stripe Button! Please %s to start accepting payments."
+msgstr ""
+
+#: wp-ecommerce-paypal.php:329
+msgid "configure your settings"
+msgstr ""

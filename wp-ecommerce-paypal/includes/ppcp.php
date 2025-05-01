@@ -127,7 +127,7 @@ add_action( 'wp_ajax_wpecpp-ppcp-disconnect', 'wpecpp_ppcp_disconnect_ajax' );
 function wpecpp_ppcp_disconnect_ajax() {
 	if ( !wp_verify_nonce( $_POST['nonce'], 'wpecpp-request' ) ) {
 		wp_send_json_error( [
-			'message' => __( 'The request has not been authenticated. Please reload the page and try again.' )
+			'message' => __( 'The request has not been authenticated. Please reload the page and try again.', 'wp-ecommerce-paypal' )
 		] );
 	}
 
@@ -138,7 +138,7 @@ function wpecpp_ppcp_disconnect_ajax() {
 
 	if ( empty( $onboarding ) ) {
 		wp_send_json_error( [
-			'message' => __( 'An error occurred while processing your account disconnection request. Please contact our support service.' )
+			'message' => __( 'An error occurred while processing your account disconnection request. Please contact our support service.', 'wp-ecommerce-paypal' )
 		] );
 	}
 
@@ -160,7 +160,7 @@ function wpecpp_ppcp_disconnect_ajax() {
 
 	if ( empty( $data['success'] ) ) {
 		wp_send_json_error( [
-			'message' => __( 'An error occurred while processing your account disconnection request. Please contact our support service.' )
+			'message' => __( 'An error occurred while processing your account disconnection request. Please contact our support service.', 'wp-ecommerce-paypal' )
 		] );
 	}
 

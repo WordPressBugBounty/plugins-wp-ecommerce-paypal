@@ -9,22 +9,6 @@
             }
         });
 
-        $('#wpecpp-stripe-connect-table').on('change', 'input[name="mode_stripe"]', function(){
-            const val = parseInt($(this).val());
-            if (val !== 1 && val !== 2) return false;
-
-            $('#stripe-connection-status-html').css({'opacity': 0.5});
-            $.post(wpecpp.ajaxUrl, {
-                action: 'wpecpp_stripe_connect_mode_change',
-                nonce: wpecpp.nonce,
-                val: val
-            }, function(response){
-                if (response.data.statusHtml) {
-                    $('#stripe-connection-status-html').html(response.data.statusHtml).css({'opacity': 1});
-                }
-            });
-        });
-
         function setOnboardingUrl() {
             const country = $('#ppcp-country').val(),
                 acceptCards = $('#ppcp-accept-cards').is(':checked'),
@@ -113,5 +97,21 @@
             return false;
         });
 
+        // Copy shortcode functionality
+        $(document).on('click', '.copy-shortcode', function() {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(this).data('clipboard-text')).select();
+            document.execCommand("copy");
+            $temp.remove();
+            
+            // Show success message
+            var $button = $(this);
+            var originalText = $button.text();
+            $button.text('Copied!');
+            setTimeout(function() {
+                $button.text(originalText);
+            }, 1500);
+        });
     });
 })(jQuery);

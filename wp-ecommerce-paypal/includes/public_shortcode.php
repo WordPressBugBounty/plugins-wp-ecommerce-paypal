@@ -14,11 +14,55 @@ function wpecpp_shortcode( $atts ) {
             'name' => '',
             'price' => '',
             'size' => '',
-            'align' => ''
+            'align' => '',
+            'id' => 0
         ],
         $atts
     );
     $atts = array_map( 'esc_attr', $atts );
+    
+    // Default values for payment methods
+    $enable_paypal = true;
+    $enable_stripe = true;
+    
+    // If ID is provided, get shortcode data from database
+    if (!empty($atts['id']) && absint($atts['id']) > 0) {
+        $post_id = absint($atts['id']);
+        $post = get_post($post_id);
+        
+        // Check if the button exists and is published
+        if (!$post || $post->post_type !== 'wpplugin_pp_button' || $post->post_status !== 'publish') {
+            return '<p class="wpecpp-error">' . esc_html__('This payment button was removed. Please contact the website owner.', 'wp-ecommerce-paypal') . '</p>';
+        }
+        
+        // Button exists and is published, so get its data
+        $atts['name'] = $post->post_title;
+        $atts['price'] = get_post_meta($post_id, 'wpplugin_paypal_button_price', true);
+        $atts['align'] = get_post_meta($post_id, '_wpecpp_alignment', true);
+        
+        // Get payment method settings
+        $enable_paypal_meta = get_post_meta($post_id, 'wpplugin_paypal_button_disable_paypal', true);
+        $enable_stripe_meta = get_post_meta($post_id, 'wpplugin_paypal_button_disable_stripe', true);
+        
+        // If meta values are set, use them ('' means it's not set, so use default)
+        if ($enable_paypal_meta !== '') {
+            $enable_paypal = ($enable_paypal_meta === '1');
+        }
+        
+        if ($enable_stripe_meta !== '') {
+            $enable_stripe = ($enable_stripe_meta === '1');
+        }
+
+        // Check if quantity is set and valid
+        $quantity = get_post_meta($post_id, 'wpplugin_paypal_button_quantity', true);
+        // Only use quantity if it's set and is a valid positive number
+        if ($quantity !== '' && intval($quantity) > 0) {
+            $atts['quantity'] = intval($quantity);
+        } else {
+            // Don't set quantity if it's not provided
+            unset($atts['quantity']);
+        }
+    }
 
 	$rand_string = 'r' . md5(uniqid(rand(), true));
 
@@ -37,15 +81,19 @@ function wpecpp_shortcode( $atts ) {
 	        $alignment = ' wpecpp-align-left';
     }
 
-	// paypal account data
-	$paypal_connection_data = wpecpp_paypal_connection_data( $atts['size'] );
+	// paypal account data - only if PayPal is enabled
+	$paypal_connection_data = $enable_paypal ? wpecpp_paypal_connection_data( $atts['size'] ) : null;
 
-    // stripe account data
-	$stripe_account_data = wpecpp_stripe_account_data();
+    // stripe account data - only if Stripe is enabled
+	$stripe_account_data = $enable_stripe ? wpecpp_stripe_account_data() : null;
 
 	$output = "<div class='wpecpp-container{$alignment}'>";
 	if ( empty( $paypal_connection_data ) && empty( $stripe_account_data ) ) {
-		$output .= __( '(Please enter your Payment methods data on the settings pages.)' );
+		if (!$enable_paypal && !$enable_stripe) {
+            $output .= __( 'No payment methods are enabled for this button.', 'wp-ecommerce-paypal' );
+        } else {
+            $output .= __( '(Please enter your Payment methods data on the settings pages.)', 'wp-ecommerce-paypal' );
+        }
 	} else {
         if ( !empty( $paypal_connection_data ) && $paypal_connection_data['connection_type'] === 'manual' ) {
 	        $output .= "<form class='wpecpp-form' target='{$paypal_connection_data['target']}' id={$rand_string} action='https://www.{$paypal_connection_data['path']}.com/cgi-bin/webscr' method='post'>";
@@ -58,7 +106,7 @@ function wpecpp_shortcode( $atts ) {
 	        $output .= "<input type='hidden' name='return' value='{$paypal_connection_data['return']}' />";
 	        $output .= "<input type='hidden' name='bn' value='WPPlugin_SP'>";
 	        $output .= "<input type='hidden' name='cancel_return' value='{$paypal_connection_data['cancel']}' />";
-	        $output .= "<input style='border: none;' class='paypalbuttonimage' type='image' src='{$paypal_connection_data['img']}' border='0' name='submit' alt='Make your payments with PayPal. It is free, secure, effective.' />";
+	        $output .= "<input style='border: none;' class='paypalbuttonimage' type='image' src='{$paypal_connection_data['img']}' border='0' name='submit' alt='" . __('Make your payments with PayPal. It is free, secure, effective.', 'wp-ecommerce-paypal') . "' />";
 	        $output .= "<img alt='' border='0' style='border:none;display:none;' src='https://www.paypal.com/{$paypal_connection_data['locale']}/i/scr/pixel.gif' width='1' height='1' />";
         } else {
 	        $form_classes = ['wpecpp-form'];
@@ -77,24 +125,28 @@ function wpecpp_shortcode( $atts ) {
 			$message = '';
 			if ( isset( $_GET['wpecpp_stripe_success'] ) ) {
 				if ( $_GET['wpecpp_stripe_success'] == 1 ) {
-					$message = '<span class="payment-success">' . __( 'The payment was successful' ) . '</span>';
+					$message = '<span class="payment-success">' . __( 'The payment was successful', 'wp-ecommerce-paypal' ) . '</span>';
 				} elseif ( $_GET['wpecpp_stripe_success'] == 0 ) {
 					if ( isset($_GET['payment_cancelled']) && $_GET['payment_cancelled'] == 1 ) {
-						$message = '<span class="payment-error">' . __( 'The payment was cancelled' ) . '</span>';
+						$message = '<span class="payment-error">' . __( 'The payment was cancelled.', 'wp-ecommerce-paypal' ) . '</span>';
 					} else {
-						$message = '<span class="payment-error">' . __( 'An unknown payment error has occurred. Please try again' ) . '</span>';
+						$message = '<span class="payment-error">' . __( 'An unknown payment error has occurred. Please try again', 'wp-ecommerce-paypal' ) . '</span>';
 					}
 				}
 			}
 		    $output .= "<style>.wpecpp-stripe-button-container > * {max-width: {$stripe_account_data['width']}px;}</style>";
 			$output .= "<div class='wpecpp-stripe-button-container'>";
-			$output .= "<a href='#' class='wpecpp-stripe-button'><span>" . __( 'Pay with Stripe' ) . "</span></a>";
+			$output .= "<a href='#' class='wpecpp-stripe-button'><span>" . __( 'Pay with Stripe', 'wp-ecommerce-paypal' ) . "</span></a>";
 			$output .= "</div>";
             $output .= "<div class='wpecpp-payment-message'>{$message}</div>";
 		}
 
 		$output .= "<input type='hidden' name='item_name' value='{$atts['name']}' />";
 		$output .= "<input type='hidden' name='amount' value='{$atts['price']}' />";
+		// Add quantity to PayPal manual form if available
+		if (isset($atts['quantity']) && $atts['quantity'] > 0) {
+			$output .= "<input type='hidden' name='quantity' value='{$atts['quantity']}' />";
+		}
 		$output .= "</form>";
     }
 	$output .= '</div>';
@@ -159,7 +211,7 @@ function wpecpp_ppcp_html( $connection_data, $rand_string ) {
 
 	<?php if ( !empty( $connection_data['advanced_cards'] ) ) { ?>
     <!-- Advanced credit and debit card payments form -->
-    <div class="wpecpp-or"><span>or</span></div>
+    <div class="wpecpp-or"><span><?php _e('or', 'wp-ecommerce-paypal'); ?></span></div>
     <div id='wpecpp-paypal-hosted-fields-container-<?php echo $rand_string; ?>' class='wpecpp-paypal-button-container wpecpp-paypal-hosted-fields-container wpecpp-<?php echo $connection_data['layout']; ?>'>
         <div id="wpecpp-card-form-<?php echo $rand_string; ?>" class="wpecpp-card-form">
             <div class="card-field-wrapper">
@@ -192,8 +244,8 @@ function wpecpp_ppcp_html( $connection_data, $rand_string ) {
     <script>
         const message_<?php echo $rand_string; ?> = document.getElementById('wpecpp-paypal-message-<?php echo $rand_string; ?>');
         if ( typeof paypal === 'undefined' ) {
-            message_<?php echo $rand_string; ?>.innerHTML = '<span class="payment-error">An error occurred while connecting PayPal SDK. Check the plugin settings.</span>';
-            throw 'An error occurred while connecting PayPal SDK. Check the plugin settings.';
+            message_<?php echo $rand_string; ?>.innerHTML = '<span class="payment-error"><?php _e('An error occurred while connecting PayPal SDK. Check the plugin settings.', 'wp-ecommerce-paypal'); ?></span>';
+            throw '<?php _e('An error occurred while connecting PayPal SDK. Check the plugin settings.', 'wp-ecommerce-paypal'); ?>';
         }
 
         paypal.getFundingSources().forEach(function (fundingSource) {
@@ -223,12 +275,16 @@ function wpecpp_ppcp_html( $connection_data, $rand_string ) {
                         const form = document.getElementById('<?php echo $rand_string; ?>'),
                             formData = new FormData(),
                             nameInput = form.querySelector('[name="item_name"]'),
-                            priceInput = form.querySelector('[name="amount"]');
+                            priceInput = form.querySelector('[name="amount"]'),
+                            quantityInput = form.querySelector('[name="quantity"]');
 
                         formData.append('action', 'wpecpp-ppcp-order-create');
                         formData.append('nonce', wpecpp.nonce);
                         formData.append('name', nameInput ? nameInput.value : '');
                         formData.append('price', priceInput ? priceInput.value : 0);
+                        if (quantityInput) {
+                            formData.append('quantity', quantityInput.value);
+                        }
 
                         return fetch(wpecpp.ajaxUrl, {
                             method: 'post',
@@ -240,7 +296,7 @@ function wpecpp_ppcp_html( $connection_data, $rand_string ) {
                             if (data.success && data.data.order_id) {
                                 orderID = data.data.order_id;
                             } else {
-                                throw data.data && data.data.message ? data.data.message : 'An unknown error occurred while creating the order. Please reload the page and try again.';
+                                throw data.data && data.data.message ? data.data.message : '<?php _e('An unknown error occurred while creating the order. Please reload the page and try again.', 'wp-ecommerce-paypal'); ?>';
                             }
                             return orderID;
                         });
@@ -273,7 +329,7 @@ function wpecpp_ppcp_html( $connection_data, $rand_string ) {
                         if (wpecpp.cancel.length && fundingSource !== 'card') {
                             window.location.href = wpecpp.cancel;
                         } else {
-                            message_<?php echo $rand_string; ?>.innerHTML = '<span class="payment-error">Payment Cancelled.</span>';
+                            message_<?php echo $rand_string; ?>.innerHTML = '<span class="payment-error"><?php _e('The payment was cancelled.', 'wp-ecommerce-paypal'); ?></span>';
                         }
                     },
                     onError: function (error) {
@@ -319,19 +375,19 @@ function wpecpp_ppcp_html( $connection_data, $rand_string ) {
                 fields: {
                     number: {
                         selector: "#number-<?php echo $rand_string; ?>",
-                        placeholder: "Card Number"
+                        placeholder: "<?php _e('Card Number', 'wp-ecommerce-paypal'); ?>"
                     },
                     expirationDate: {
                         selector: "#expirationDate-<?php echo $rand_string; ?>",
-                        placeholder: "Expiration"
+                        placeholder: "<?php _e('Expiration', 'wp-ecommerce-paypal'); ?>"
                     },
                     cvv: {
                         selector: "#cvv-<?php echo $rand_string; ?>",
-                        placeholder: "CVV"
+                        placeholder: "<?php _e('CVV', 'wp-ecommerce-paypal'); ?>"
                     },
                     postalCode: {
                         selector: "#postalCode-<?php echo $rand_string; ?>",
-                        placeholder: "Billing zip code / Postal code"
+                        placeholder: "<?php _e('Billing zip code / Postal code', 'wp-ecommerce-paypal'); ?>"
                     }
                 },
                 createOrder: function() {
@@ -343,12 +399,16 @@ function wpecpp_ppcp_html( $connection_data, $rand_string ) {
                     const form = document.getElementById('<?php echo $rand_string; ?>'),
                         formData = new FormData(),
                         nameInput = form.querySelector('[name="item_name"]'),
-                        priceInput = form.querySelector('[name="amount"]');
+                        priceInput = form.querySelector('[name="amount"]'),
+                        quantityInput = form.querySelector('[name="quantity"]');
 
                     formData.append('action', 'wpecpp-ppcp-order-create');
                     formData.append('nonce', wpecpp.nonce);
                     formData.append('name', nameInput ? nameInput.value : '');
                     formData.append('price', priceInput ? priceInput.value : 0);
+                    if (quantityInput) {
+                        formData.append('quantity', quantityInput.value);
+                    }
 
                     return fetch(wpecpp.ajaxUrl, {
                         method: 'post',
@@ -359,7 +419,7 @@ function wpecpp_ppcp_html( $connection_data, $rand_string ) {
                         if (data.success && data.data.order_id) {
                             orderId_<?php echo $rand_string; ?> = data.data.order_id;
                         } else {
-                            throw data.data && data.data.message ? data.data.message : 'An unknown error occurred while creating the order. Please reload the page and try again.';
+                            throw data.data && data.data.message ? data.data.message : '<?php _e('An unknown error occurred while creating the order. Please reload the page and try again.', 'wp-ecommerce-paypal'); ?>';
                         }
                         return orderId_<?php echo $rand_string; ?>;
                     });
@@ -408,7 +468,7 @@ function wpecpp_ppcp_html( $connection_data, $rand_string ) {
                     }
 
                     if (!formValid) {
-                        message_<?php echo $rand_string; ?>.innerHTML = '<span class="payment-error">Please correct the errors in the fields above.</span>';
+                        message_<?php echo $rand_string; ?>.innerHTML = '<span class="payment-error"><?php _e('Please correct the errors in the fields above.', 'wp-ecommerce-paypal'); ?></span>';
                         return false;
                     }
 
@@ -494,5 +554,5 @@ function wpecpp_ppcp_html( $connection_data, $rand_string ) {
 }
 
 function wpecpp_free_ppcp_js_sdk_error_message() {
-    return '<strong>Site admin</strong>, an error was detected in the plugin settings.</br>Please check the PayPal connection and product settings (price, name, etc.)';
+    return '<strong>' . __( 'Site admin', 'wp-ecommerce-paypal' ) . '</strong>, ' . __( 'an error was detected in the plugin settings.', 'wp-ecommerce-paypal' ) . '</br>' . __( 'Please check the PayPal connection and product settings (price, name, etc.)', 'wp-ecommerce-paypal' );
 }

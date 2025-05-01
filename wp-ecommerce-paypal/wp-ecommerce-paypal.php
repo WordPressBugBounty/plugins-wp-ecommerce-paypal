@@ -8,10 +8,12 @@ Tags: PayPal payment, PayPal, button, payment, online payments, pay now, buy now
 Author: Scott Paterson
 Author URI: https://wpplugin.org
 License: GPL2
-Version: 1.9.1
+Version: 2.0
+Text Domain: wp-ecommerce-paypal
+Domain Path: /languages
 */
 
-/*  Copyright 2014-2024 Scott Paterson
+/*  Copyright 2014-2025 Scott Paterson
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,7 +30,13 @@ Version: 1.9.1
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-define( 'WPECPP_FREE_VERSION_NUM', '1.9.1' );
+// Load plugin textdomain
+function wpecpp_load_textdomain() {
+	load_plugin_textdomain('wp-ecommerce-paypal', false, dirname(plugin_basename(__FILE__)) . '/languages');
+}
+add_action('plugins_loaded', 'wpecpp_load_textdomain');
+
+define( 'WPECPP_FREE_VERSION_NUM', '2.0' );
 
 define( 'WPECPP_FREE_STRIPE_CONNECT_ENDPOINT', 'https://wpplugin.org/stripe-wpecpp/connect.php' );
 define( 'WPECPP_FREE_PPCP_API', 'https://wpplugin.org/ppcp-wpecpp/' );
@@ -62,7 +70,7 @@ function wpecpp_free_options() {
 		'cancel' => '',
 		'return' => '',
 		'activation_notice_shown' => 0,
-		'stripe_connect_notice_dismissed' => 0,
+		'stripe_connect_notice_dismissed' => 1,
 		'ppcp_onboarding' => [
 			'live' => [],
 			'sandbox' => []
@@ -78,11 +86,11 @@ function wpecpp_free_options() {
 		'ppcp_shape' => 'rect',
 		'ppcp_label' => 'buynow',
 		'ppcp_height' => 40,
-		'ppcp_notice_dismissed' => 0,
+		'ppcp_notice_dismissed' => 1,
 		'updated_time' => 0,
 		'ppcp_width' => 300,
 		'stripe_width' => 300,
-		'ppcp_acdc_button_text' => 'PLACE ORDER',
+		'ppcp_acdc_button_text' => __( 'PLACE ORDER', 'wp-ecommerce-paypal' ),
 		'address' => '2'
 	];
 	$options = (array) get_option( 'wpecpp_settings' );
@@ -145,10 +153,14 @@ function wpecpp_free_activate() {
 		}
 	}
 
-	$options['stripe_connect_notice_dismissed'] = 0;
-	$options['ppcp_notice_dismissed'] = 0;
+	// Set notices as dismissed
+	$options['stripe_connect_notice_dismissed'] = 1;
+	$options['ppcp_notice_dismissed'] = 1;
 
 	wpecpp_free_options_update( $options );
+
+	// Set transient for admin notice
+	set_transient('wpecpp_activation_notice', true, 5);
 }
 
 /*
@@ -200,20 +212,11 @@ function wpecpp_free_plugins_page_links( $links ) {
 		unset( $links['edit'] );
 	}
 
-	$links[] = '<a target="_blank" href="https://wpplugin.org/documentation/">' . __( 'Support' ) . '</a>';
-	$links[] = '<a target="_blank" href="https://wpplugin.org/downloads/easy-paypal-buy-now-button/">' . __( 'Pro Version' ) . '</a>';
-	$links[] = '<a href="admin.php?page=wpecpp-settings">' . __( 'Settings' ) . '</a>';
-	$links[] = '<a href="plugin-editor.php?file=wpplugin-easy-paypal-button/easy-paypal-button.php">' . __( 'Edit' ) . '</a>';
+	$links[] = '<a target="_blank" href="https://wpplugin.org/documentation/">' . __( 'Support', 'wp-ecommerce-paypal' ) . '</a>';
+	$links[] = '<a target="_blank" href="https://wpplugin.org/downloads/easy-paypal-buy-now-button/">' . __( 'Pro Version', 'wp-ecommerce-paypal' ) . '</a>';
+	$links[] = '<a href="admin.php?page=wpecpp-settings">' . __( 'Settings', 'wp-ecommerce-paypal' ) . '</a>';
 
 	return $links; 
-}
-
-/*
- * Add menu item
- */
-add_action( 'admin_menu', 'wpecpp_free_menu' );
-function wpecpp_free_menu() {
-	add_menu_page( 'Easy PayPal & Stripe Button', 'PayPal & Stripe', 'manage_options', 'wpecpp-settings', 'wpecpp_settings_page', 'dashicons-cart','28.7' );
 }
 
 /*
@@ -247,29 +250,89 @@ function wpecpp_free_frontend_enqueue() {
 	] );
 }
 
+// Add deactivation survey
+function wpecpp_enqueue_deactivation_survey() {
+	if (get_current_screen() && get_current_screen()->id === 'plugins') {
+		wp_enqueue_script('wpecpp-deactivation-survey', plugins_url('assets/js/deactivation-survey.js', __FILE__), array('jquery'), WPECPP_FREE_VERSION_NUM, true);
+		wp_localize_script('wpecpp-deactivation-survey', 'wpecppDeactivationSurvey', array(
+			'pluginVersion' => WPECPP_FREE_VERSION_NUM,
+			'deactivationOptions' => array(
+				'upgraded_to_pro' => __('I upgraded to the Pro version', 'wp-ecommerce-paypal'),
+				'no_longer_needed' => __('I no longer need the plugin', 'wp-ecommerce-paypal'),
+				'found_better' => __('I found a better plugin', 'wp-ecommerce-paypal'),
+				'not_working' => __('The plugin is not working', 'wp-ecommerce-paypal'),
+				'fees_expensive' => __('The fees are too high', 'wp-ecommerce-paypal'),
+				'temporary' => __('It\'s a temporary deactivation', 'wp-ecommerce-paypal'),
+				'other' => __('Other', 'wp-ecommerce-paypal')
+			),
+			'strings' => array(
+				'title' => __('Easy PayPal & Stripe Button Deactivation', 'wp-ecommerce-paypal'),
+				'description' => __('If you have a moment, please let us know why you are deactivating. All submissions are anonymous and we only use this feedback to improve this plugin.', 'wp-ecommerce-paypal'),
+				'otherPlaceholder' => __('Please tell us more...', 'wp-ecommerce-paypal'),
+				'skipButton' => __('Skip & Deactivate', 'wp-ecommerce-paypal'),
+				'submitButton' => __('Submit & Deactivate', 'wp-ecommerce-paypal'),
+				'cancelButton' => __('Cancel', 'wp-ecommerce-paypal'),
+				'betterPluginQuestion' => __('What is the name of the plugin?', 'wp-ecommerce-paypal'),
+				'notWorkingQuestion' => __('We\'re sorry to hear that. Can you describe the issue?', 'wp-ecommerce-paypal'),
+				'errorRequired' => __('Error: Please complete the required field.', 'wp-ecommerce-paypal')
+			)
+		));
+	}
+}
+add_action('admin_enqueue_scripts', 'wpecpp_enqueue_deactivation_survey');
+
 /*
  * Incudes
  */
 // Functions
-include_once ( 'includes/functions.php' );
+require_once plugin_dir_path( __FILE__ ) . 'includes/functions.php';
 
 // Admin settings page
-include_once ( 'includes/admin_settings_page.php' );
+require_once plugin_dir_path( __FILE__ ) . 'includes/admin_settings_page.php';
+
+// Admin menu
+require_once plugin_dir_path( __FILE__ ) . 'includes/admin_menu.php';
 
 // Admin includes
-include_once( 'includes/admin_notices.php' );
+require_once plugin_dir_path( __FILE__ ) . 'includes/admin_notices.php';
 
 // Add button to page or post editor
-include_once ( 'includes/admin_media_button.php' );
+require_once plugin_dir_path( __FILE__ ) . 'includes/admin_media_button.php';
 
 // Include Stripe connect
-include_once( 'includes/stripe_connect.php' );
+require_once plugin_dir_path( __FILE__ ) . 'includes/stripe_connect.php';
 
 // Include PayPal Commerce Platform
-include_once( 'includes/ppcp.php' );
+require_once plugin_dir_path( __FILE__ ) . 'includes/ppcp.php';
 
 // Include PayPal Commerce Platform - Frontend
-include_once( 'includes/ppcp_frontend.php' );
+require_once plugin_dir_path( __FILE__ ) . 'includes/ppcp_frontend.php';
 
 // Shortcode
-include_once ( 'includes/public_shortcode.php' );
+require_once plugin_dir_path( __FILE__ ) . 'includes/public_shortcode.php';
+
+// Shortcode manager
+require_once plugin_dir_path( __FILE__ ) . 'includes/shortcode_manager.php';
+
+// Add admin notice
+function wpecpp_admin_notice() {
+	if (get_transient('wpecpp_activation_notice')) {
+		$settings_url = admin_url('admin.php?page=wpecpp-settings');
+		?>
+		<div class="notice notice-success is-dismissible">
+			<p>
+				<?php printf(
+					__('Thank you for installing Easy PayPal & Stripe Button! Please %s to start accepting payments.', 'wp-ecommerce-paypal'),
+					sprintf(
+						'<a href="%s">%s</a>',
+						esc_url($settings_url),
+						__('configure your settings', 'wp-ecommerce-paypal')
+					)
+				); ?>
+			</p>
+		</div>
+		<?php
+		delete_transient('wpecpp_activation_notice');
+	}
+}
+add_action('admin_notices', 'wpecpp_admin_notice');

@@ -31,9 +31,21 @@ function wpecpp_stripe_connection_status() {
 				]
 			];
 
-			$account = wp_remote_get( $url, $args );
+			$response = wp_remote_get( $url, $args );
 
-			$account = json_decode( $account['body'], true );
+			if ( is_wp_error( $response ) ) {
+				return $wpecppStripeConnectionStatus;
+			}
+
+			$body = wp_remote_retrieve_body( $response );
+			if ( empty( $body ) ) {
+				return $wpecppStripeConnectionStatus;
+			}
+
+			$account = json_decode( $body, true );
+			if ( !is_array( $account ) || !isset( $account['payouts_enabled'] ) ) {
+				return $wpecppStripeConnectionStatus;
+			}
 
 			if ( intval( $account['payouts_enabled'] ) === 1 ) {
 				$wpecppStripeConnectionStatus = [
@@ -55,38 +67,53 @@ function wpecpp_stripe_connection_status_html() {
 
 	if ( $connected ) {
 		$reconnect_mode = $connected['mode'] === 'sandbox' ? 'live' : 'sandbox';
-		$result = sprintf(
-			'<div class="notice inline notice-success wpecpp-stripe-connect">
-				<p><strong>%s</strong><br>%s — Administrator (Owner)</p>
-				<p>Pay as you go pricing: 2%% per-transaction fee + Stripe fees.</p>
-			</div>
-			<div>
-				Your Stripe account is connected in <strong>%s</strong> mode. <a href="%s">Connect in <strong>%s</strong> mode</a>, or <a href="%s">disconnect this account</a>.
-			</div>',
-			$connected['display_name'],
-			$connected['email'],
-			$connected['mode'],
-			wpecpp_stripe_connect_url( $reconnect_mode ),
-			$reconnect_mode,
-			wpecpp_stripe_disconnect_url( $connected['account_id'], $connected['token'] )
-		);
+
+        // Build the status message in a clearer way
+        $account_info = sprintf(
+            '<div class="notice inline notice-success wpecpp-stripe-connect">
+                <p><strong>%s</strong><br>%s — %s</p>
+                <p>%s</p>
+            </div>',
+            esc_html( $connected['display_name'] ),
+            esc_html( $connected['email'] ),
+            esc_html__( 'Administrator (Owner)', 'wp-ecommerce-paypal' ),
+            esc_html__( 'Pay as you go pricing: 2% per-transaction fee + Stripe fees.', 'wp-ecommerce-paypal' )
+        );
+        
+        $connection_status = sprintf(
+            '<div>%s <strong>%s</strong> %s, %s <a href="%s">%s</a> %s <a href="%s">%s</a>.</div>',
+            esc_html__( 'Your Stripe account is connected in', 'wp-ecommerce-paypal' ),
+            esc_html( $connected['mode'] ),
+            esc_html__( 'mode', 'wp-ecommerce-paypal' ),
+            esc_html__( 'Connect in', 'wp-ecommerce-paypal' ),
+            esc_url( wpecpp_stripe_connect_url( $reconnect_mode ) ),
+            esc_html( $reconnect_mode ),
+            esc_html__( 'or', 'wp-ecommerce-paypal' ),
+            esc_url( wpecpp_stripe_disconnect_url( $connected['account_id'], $connected['token'] ) ),
+            esc_html__( 'disconnect this account', 'wp-ecommerce-paypal' )
+        );
+        
+        $result = $account_info . $connection_status;
+		
+
+
 		if ( empty( $connected['email'] ) ) {
 			$result .= '<p>
-                <strong>Please review the warnings below and resolve them in your account settings or by contacting support.</strong>
+                <strong>' . esc_html__( 'Please review the warnings below and resolve them in your account settings or by contacting support.', 'wp-ecommerce-paypal' ) . '</strong>
             </p>
             <ul class="ppcp-list ppcp-list-warning">
-                <li>Can\'t read connected account email address</li>
+                <li>' . esc_html__( 'Can\'t read connected account email address', 'wp-ecommerce-paypal' ) . '</li>
             </ul>';
 		}
 	} else {
 		$result = sprintf(
 			'<a href="%s"" class="stripe-connect-btn">
-				<span>Connect with Stripe</span>
+				<span>' . __( 'Connect with Stripe', 'wp-ecommerce-paypal' ) . '</span>
 			</a>
 			<br />
 			<br />
-			You only pay the standard Stripe fees + 2%%. Have questions about connecting with Stripe?
-			Please see the <a target="_blank" href="https://wpplugin.org/documentation/stripe-connect/">documentation</a>.',
+			' . __( 'You only pay the standard Stripe fees + 2%%. Have questions about connecting with Stripe?
+			Please see the', 'wp-ecommerce-paypal' ) . ' <a target="_blank" href="https://wpplugin.org/documentation/stripe-connect/">' . __( 'documentation', 'wp-ecommerce-paypal' ) . '</a>.',
 			wpecpp_stripe_connect_url()
 		);
 	}
@@ -149,7 +176,7 @@ function wpecpp_stripe_connect_completion() {
 		
 	// nonce check
 	if (!isset($_GET['wpecpp_free_nonce']) || !wp_verify_nonce($_GET['wpecpp_free_nonce'], 'wpecpp_free_stripe')) {
-		wp_die('Security check failed');
+		wp_die(__('Security check failed', 'wp-ecommerce-paypal'));
 	}
 
 
@@ -186,7 +213,7 @@ function wpecpp_stripe_disconnected() {
 
 	// nonce check
 	if (!isset($_GET['wpecpp_free_nonce']) || !wp_verify_nonce($_GET['wpecpp_free_nonce'], 'wpecpp_free_stripe')) {
-		wp_die('Security check failed');
+		wp_die(__('Security check failed', 'wp-ecommerce-paypal'));
 	}
 
 
@@ -215,26 +242,6 @@ function wpecpp_stripe_disconnected() {
 }
 
 /**
- * Change Stripe mode
- * @since 1.7.4
- */
-add_action( 'wp_ajax_wpecpp_stripe_connect_mode_change', 'wpecpp_stripe_connect_mode_change' );
-function wpecpp_stripe_connect_mode_change() {
-	if ( !wp_verify_nonce( $_POST['nonce'], 'wpecpp-request' ) || !current_user_can( 'manage_options' ) ) {
-		wp_send_json_error();
-	}
-
-	$options = wpecpp_free_options();
-	$mode_stripe = intval( $_POST['val'] ) === 2 ? 2 : 1;
-    $options['mode_stripe'] = $mode_stripe;
-	wpecpp_free_options_update( $options );
-
-	wp_send_json_success( [
-		'statusHtml' => wpecpp_stripe_connection_status_html()
-	] );
-}
-
-/**
  * Create Stripe checkout session
  * @since 1.7.4
  */
@@ -243,7 +250,7 @@ add_action( 'wp_ajax_nopriv_wpecpp_stripe_checkout_session', 'wpecpp_stripe_chec
 function wpecpp_stripe_checkout_session() {
 	if ( !wp_verify_nonce( $_POST['nonce'], 'wpecpp-frontend-request' ) ) {
 		wp_send_json_error( [
-			'message' => __( 'Security error. The payment has not been made. Please reload the page and try again.' )
+			'message' => esc_html__( 'Security error. The payment has not been made. Please reload the page and try again.', 'wp-ecommerce-paypal' )
 		] );
 	}
 
@@ -252,7 +259,7 @@ function wpecpp_stripe_checkout_session() {
 	$stripe_account_data = wpecpp_stripe_account_data();
 	if ( empty( $stripe_account_data ) ) {
 		wp_send_json_error( [
-			'message' => __( 'Stripe connection error. Please contact the site administrator.' )
+			'message' => esc_html__( 'Stripe connection error. Please contact the site administrator.', 'wp-ecommerce-paypal' )
 		] );
 	}
 
@@ -271,7 +278,7 @@ function wpecpp_stripe_checkout_session() {
 					'name' => $name
 				],
 			],
-			'quantity' => 1
+			'quantity' => isset($data['quantity']) && intval($data['quantity']) > 0 ? intval($data['quantity']) : 1
 		]
 	];
 
@@ -318,7 +325,7 @@ function wpecpp_stripe_checkout_session() {
 
 	if ( empty( $checkout_session->session_id ) || empty( $checkout_session->stripe_key ) ) {
 		wp_send_json_error( [
-			'message' => !empty( $checkout_session->message ) ? $checkout_session->message : __( 'An unexpected error occurred. Please try again.' )
+			'message' => !empty( $checkout_session->message ) ? $checkout_session->message : esc_html__( 'An unexpected error occurred. Please try again.', 'wp-ecommerce-paypal' )
 		] );
 	}
 
