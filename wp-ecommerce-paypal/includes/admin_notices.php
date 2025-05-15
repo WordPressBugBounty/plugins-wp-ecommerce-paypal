@@ -25,7 +25,7 @@ function wpecpp_admin_activation_notice() {
  * Show admin notice for Stripe Connect.
  * @since 1.7.4
  */
-add_action( 'admin_notices', 'wpecpp_admin_stripe_connect_notice' );
+//add_action( 'admin_notices', 'wpecpp_admin_stripe_connect_notice' );
 function wpecpp_admin_stripe_connect_notice() {
 	$options = wpecpp_free_options();
 	$mode = intval( $options['mode_stripe'] ) === 2 ? 'live' : 'sandbox';
@@ -93,7 +93,7 @@ function wpecpp_admin_stripe_connect_error_notice() {
  * Show admin notice for PayPal Commerce Platform.
  * @since 1.7.4
  */
-add_action( 'admin_notices', 'wpecpp_ppcp_admin_notice' );
+//add_action( 'admin_notices', 'wpecpp_ppcp_admin_notice' );
 function wpecpp_ppcp_admin_notice() {
 	$options = wpecpp_free_options();
 	$env = intval( $options['mode'] ) === 2 ? 'live' : 'sandbox';

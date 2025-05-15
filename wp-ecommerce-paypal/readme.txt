@@ -1,12 +1,12 @@
 === Easy PayPal & Stripe Buy Now Button ===
-Contributors: scottpaterson,wp-plugin
+Contributors: scottpaterson, wp-plugin
 Donate link: https://wpplugin.org/donate/
 Tags: PayPal, gateway, paypal button, ecommerce, shop
 Author URI: https://wpplugin.org
 Requires at least: 3.0
 Tested up to: 6.8
 Requires PHP: 5.4
-Stable tag: 2.0
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -104,6 +104,11 @@ Yes, there is no limit to the amount of PayPal Buy Now buttons you can put on on
 4. PayPal Settings page
 
 == Changelog ==
+
+= 2.0.1 =
+* 5/15/25
+* Fix - Fixed small security issue on settings page.
+* Change - Removed PayPal & Stripe connect notices.
 
 = 2.0 =
 * 4/30/25

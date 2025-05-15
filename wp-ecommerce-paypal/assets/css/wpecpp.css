@@ -310,3 +310,7 @@
     border-color: red !important;
 }
 /* Hosted Fields END */
+
+.wpecpp-stripe-button-container a {
+    text-decoration: none !important;
+}

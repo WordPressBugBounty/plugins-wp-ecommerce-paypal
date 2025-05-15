@@ -15,7 +15,7 @@ function wpecpp_settings_page() {
             wp_die( __( 'You do not have sufficient permissions to access this page. Please sign in as an administrator.', 'wp-ecommerce-paypal' ) );
         } ?>
 
-	    <form method='post' action='<?php $_SERVER["REQUEST_URI"]; ?>' id="wpecpp-settings-form">
+	    <form method='post' action='<?php echo esc_url($_SERVER["REQUEST_URI"]); ?>' id="wpecpp-settings-form">
 		    <?php wp_nonce_field( 'wpecpp-save-settings','wpecpp_save_settings_nonce' ); ?>
             <input type="hidden" id="wpecpp-auto-update" name="update" value="">
             <input type="hidden" id="active-tab" name="tab" value="<?php echo esc_attr($active_tab); ?>">
@@ -151,27 +151,27 @@ function wpecpp_settings_page() {
                                         </td>
                                         <td>
                                             <select name="language" style="width: 280px">
-                                                <option <?php if ($options['language'] == "default") { echo "selected"; } ?> value="default"><?php _e( 'Default', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['language'] == "1") { echo "selected"; } ?> value="1"><?php _e( 'Danish', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['language'] == "2") { echo "selected"; } ?> value="2"><?php _e( 'Dutch', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['language'] == "3") { echo "selected"; } ?> value="3"><?php _e( 'English', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['language'] == "20") { echo "selected"; } ?> value="20"><?php _e( 'English - UK', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['language'] == "4") { echo "selected"; } ?> value="4"><?php _e( 'French', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['language'] == "5") { echo "selected"; } ?> value="5"><?php _e( 'German', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['language'] == "6") { echo "selected"; } ?> value="6"><?php _e( 'Hebrew', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['language'] == "7") { echo "selected"; } ?> value="7"><?php _e( 'Italian', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['language'] == "8") { echo "selected"; } ?> value="8"><?php _e( 'Japanese', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['language'] == "9") { echo "selected"; } ?> value="9"><?php _e( 'Norwegian', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['language'] == "10") { echo "selected"; } ?> value="10"><?php _e( 'Polish', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['language'] == "11") { echo "selected"; } ?> value="11"><?php _e( 'Portuguese', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['language'] == "12") { echo "selected"; } ?> value="12"><?php _e( 'Russian', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['language'] == "13") { echo "selected"; } ?> value="13"><?php _e( 'Spanish', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['language'] == "14") { echo "selected"; } ?> value="14"><?php _e( 'Swedish', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['language'] == "15") { echo "selected"; } ?> value="15"><?php _e( 'Simplified Chinese -China only', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['language'] == "16") { echo "selected"; } ?> value="16"><?php _e( 'Traditional Chinese - Hong Kong only', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['language'] == "17") { echo "selected"; } ?> value="17"><?php _e( 'Traditional Chinese - Taiwan only', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['language'] == "18") { echo "selected"; } ?> value="18"><?php _e( 'Turkish', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['language'] == "19") { echo "selected"; } ?> value="19"><?php _e( 'Thai', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['language']) == "default") { echo "selected"; } ?> value="default"><?php _e( 'Default', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['language']) == "1") { echo "selected"; } ?> value="1"><?php _e( 'Danish', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['language']) == "2") { echo "selected"; } ?> value="2"><?php _e( 'Dutch', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['language']) == "3") { echo "selected"; } ?> value="3"><?php _e( 'English', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['language']) == "20") { echo "selected"; } ?> value="20"><?php _e( 'English - UK', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['language']) == "4") { echo "selected"; } ?> value="4"><?php _e( 'French', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['language']) == "5") { echo "selected"; } ?> value="5"><?php _e( 'German', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['language']) == "6") { echo "selected"; } ?> value="6"><?php _e( 'Hebrew', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['language']) == "7") { echo "selected"; } ?> value="7"><?php _e( 'Italian', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['language']) == "8") { echo "selected"; } ?> value="8"><?php _e( 'Japanese', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['language']) == "9") { echo "selected"; } ?> value="9"><?php _e( 'Norwegian', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['language']) == "10") { echo "selected"; } ?> value="10"><?php _e( 'Polish', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['language']) == "11") { echo "selected"; } ?> value="11"><?php _e( 'Portuguese', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['language']) == "12") { echo "selected"; } ?> value="12"><?php _e( 'Russian', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['language']) == "13") { echo "selected"; } ?> value="13"><?php _e( 'Spanish', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['language']) == "14") { echo "selected"; } ?> value="14"><?php _e( 'Swedish', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['language']) == "15") { echo "selected"; } ?> value="15"><?php _e( 'Simplified Chinese -China only', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['language']) == "16") { echo "selected"; } ?> value="16"><?php _e( 'Traditional Chinese - Hong Kong only', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['language']) == "17") { echo "selected"; } ?> value="17"><?php _e( 'Traditional Chinese - Taiwan only', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['language']) == "18") { echo "selected"; } ?> value="18"><?php _e( 'Turkish', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['language']) == "19") { echo "selected"; } ?> value="19"><?php _e( 'Thai', 'wp-ecommerce-paypal' ); ?></option>
                                             </select>
                                         </td>
                                         <td>
@@ -190,31 +190,31 @@ function wpecpp_settings_page() {
                                         </td>
                                         <td>
                                             <select name="currency" style="width: 280px">
-                                                <option <?php if ($options['currency'] == "1") { echo "selected"; } ?> value="1"><?php _e( 'Australian Dollar - AUD', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['currency'] == "2") { echo "selected"; } ?> value="2"><?php _e( 'Brazilian Real - BRL', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['currency'] == "3") { echo "selected"; } ?> value="3"><?php _e( 'Canadian Dollar - CAD', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['currency'] == "4") { echo "selected"; } ?> value="4"><?php _e( 'Czech Koruna - CZK', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['currency'] == "5") { echo "selected"; } ?> value="5"><?php _e( 'Danish Krone - DKK', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['currency'] == "6") { echo "selected"; } ?> value="6"><?php _e( 'Euro - EUR', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['currency'] == "7") { echo "selected"; } ?> value="7"><?php _e( 'Hong Kong Dollar - HKD', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['currency'] == "8") { echo "selected"; } ?> value="8"><?php _e( 'Hungarian Forint - HUF', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['currency'] == "9") { echo "selected"; } ?> value="9"><?php _e( 'Israeli New Sheqel - ILS', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['currency'] == "10") { echo "selected"; } ?> value="10"><?php _e( 'Japanese Yen - JPY', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['currency'] == "11") { echo "selected"; } ?> value="11"><?php _e( 'Malaysian Ringgit - MYR', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['currency'] == "12") { echo "selected"; } ?> value="12"><?php _e( 'Mexican Peso - MXN', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['currency'] == "13") { echo "selected"; } ?> value="13"><?php _e( 'Norwegian Krone - NOK', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['currency'] == "14") { echo "selected"; } ?> value="14"><?php _e( 'New Zealand Dollar - NZD', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['currency'] == "15") { echo "selected"; } ?> value="15"><?php _e( 'Philippine Peso - PHP', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['currency'] == "16") { echo "selected"; } ?> value="16"><?php _e( 'Polish Zloty - PLN', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['currency'] == "17") { echo "selected"; } ?> value="17"><?php _e( 'Pound Sterling - GBP', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['currency'] == "18") { echo "selected"; } ?> value="18"><?php _e( 'Russian Ruble - RUB', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['currency'] == "19") { echo "selected"; } ?> value="19"><?php _e( 'Singapore Dollar - SGD', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['currency'] == "20") { echo "selected"; } ?> value="20"><?php _e( 'Swedish Krona - SEK', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['currency'] == "21") { echo "selected"; } ?> value="21"><?php _e( 'Swiss Franc - CHF', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['currency'] == "22") { echo "selected"; } ?> value="22"><?php _e( 'Taiwan New Dollar - TWD', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['currency'] == "23") { echo "selected"; } ?> value="23"><?php _e( 'Thai Baht - THB', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['currency'] == "24") { echo "selected"; } ?> value="24"><?php _e( 'Turkish Lira - TRY', 'wp-ecommerce-paypal' ); ?></option>
-                                                <option <?php if ($options['currency'] == "25") { echo "selected"; } ?> value="25"><?php _e( 'U.S. Dollar - USD', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "1") { echo "selected"; } ?> value="1"><?php _e( 'Australian Dollar - AUD', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "2") { echo "selected"; } ?> value="2"><?php _e( 'Brazilian Real - BRL', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "3") { echo "selected"; } ?> value="3"><?php _e( 'Canadian Dollar - CAD', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "4") { echo "selected"; } ?> value="4"><?php _e( 'Czech Koruna - CZK', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "5") { echo "selected"; } ?> value="5"><?php _e( 'Danish Krone - DKK', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "6") { echo "selected"; } ?> value="6"><?php _e( 'Euro - EUR', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "7") { echo "selected"; } ?> value="7"><?php _e( 'Hong Kong Dollar - HKD', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "8") { echo "selected"; } ?> value="8"><?php _e( 'Hungarian Forint - HUF', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "9") { echo "selected"; } ?> value="9"><?php _e( 'Israeli New Sheqel - ILS', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "10") { echo "selected"; } ?> value="10"><?php _e( 'Japanese Yen - JPY', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "11") { echo "selected"; } ?> value="11"><?php _e( 'Malaysian Ringgit - MYR', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "12") { echo "selected"; } ?> value="12"><?php _e( 'Mexican Peso - MXN', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "13") { echo "selected"; } ?> value="13"><?php _e( 'Norwegian Krone - NOK', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "14") { echo "selected"; } ?> value="14"><?php _e( 'New Zealand Dollar - NZD', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "15") { echo "selected"; } ?> value="15"><?php _e( 'Philippine Peso - PHP', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "16") { echo "selected"; } ?> value="16"><?php _e( 'Polish Zloty - PLN', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "17") { echo "selected"; } ?> value="17"><?php _e( 'Pound Sterling - GBP', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "18") { echo "selected"; } ?> value="18"><?php _e( 'Russian Ruble - RUB', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "19") { echo "selected"; } ?> value="19"><?php _e( 'Singapore Dollar - SGD', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "20") { echo "selected"; } ?> value="20"><?php _e( 'Swedish Krona - SEK', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "21") { echo "selected"; } ?> value="21"><?php _e( 'Swiss Franc - CHF', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "22") { echo "selected"; } ?> value="22"><?php _e( 'Taiwan New Dollar - TWD', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "23") { echo "selected"; } ?> value="23"><?php _e( 'Thai Baht - THB', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "24") { echo "selected"; } ?> value="24"><?php _e( 'Turkish Lira - TRY', 'wp-ecommerce-paypal' ); ?></option>
+                                                <option <?php if (esc_attr($options['currency']) == "25") { echo "selected"; } ?> value="25"><?php _e( 'U.S. Dollar - USD', 'wp-ecommerce-paypal' ); ?></option>
                                             </select>
                                         </td>
                                         <td>
@@ -274,7 +274,7 @@ function wpecpp_settings_page() {
                                             <b><?php _e( 'Live Account:', 'wp-ecommerce-paypal' ); ?></b>
                                         </td>
                                         <td>
-                                            <input type='text' name='liveaccount' value='<?php echo $options['liveaccount']; ?>' readonly />
+                                            <input type='text' name='liveaccount' value='<?php echo esc_attr($options['liveaccount']); ?>' readonly />
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -285,7 +285,7 @@ function wpecpp_settings_page() {
                                             <b><?php _e( 'Sandbox Account:', 'wp-ecommerce-paypal' ); ?></b>
                                         </td>
                                         <td>
-                                            <input type='text' name='sandboxaccount' value='<?php echo $options['sandboxaccount']; ?>' readonly />
+                                            <input type='text' name='sandboxaccount' value='<?php echo esc_attr($options['sandboxaccount']); ?>' readonly />
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -309,13 +309,13 @@ function wpecpp_settings_page() {
                                         </td>
                                         <td>
                                             <label>
-                                                <input <?php if ($options['mode'] == "1") { echo "checked='checked'"; } ?> type='radio' name='mode' value='1' onclick="autoSubmitModeChange(event)">
+                                                <input <?php if (esc_attr($options['mode']) == "1") { echo "checked='checked'"; } ?> type='radio' name='mode' value='1' onclick="autoSubmitModeChange(event)">
                                                 <?php _e( 'On (Sandbox mode)', 'wp-ecommerce-paypal' ); ?>
                                             </label>
                                             &nbsp;
                                             &nbsp;
                                             <label>
-                                                <input <?php if ($options['mode'] == "2") { echo "checked='checked'"; } ?> type='radio' name='mode' value='2' onclick="autoSubmitModeChange(event)">
+                                                <input <?php if (esc_attr($options['mode']) == "2") { echo "checked='checked'"; } ?> type='radio' name='mode' value='2' onclick="autoSubmitModeChange(event)">
                                                 <?php _e( 'Off (Live mode)', 'wp-ecommerce-paypal' ); ?>
                                             </label>
                                         </td>
@@ -326,13 +326,13 @@ function wpecpp_settings_page() {
                                         </td>
                                         <td>
                                             <label>
-                                                <input <?php if ($options['disable_paypal'] == "1") { echo "checked='checked'"; } ?> type='radio' name='disable_paypal' value='1'>
+                                                <input <?php if (esc_attr($options['disable_paypal']) == "1") { echo "checked='checked'"; } ?> type='radio' name='disable_paypal' value='1'>
                                                 <?php _e( 'No', 'wp-ecommerce-paypal' ); ?>
                                             </label>
                                             &nbsp;
                                             &nbsp;
                                             <label>
-                                                <input <?php if ($options['disable_paypal'] == "2") { echo "checked='checked'"; } ?> type='radio' name='disable_paypal' value='2'>
+                                                <input <?php if (esc_attr($options['disable_paypal']) == "2") { echo "checked='checked'"; } ?> type='radio' name='disable_paypal' value='2'>
                                                 <?php _e( 'Yes', 'wp-ecommerce-paypal' ); ?>
                                             </label>
                                         </td>
@@ -345,14 +345,14 @@ function wpecpp_settings_page() {
                                         </td>
                                         <td>
                                             <label>
-                                                <input <?php if ($options['paymentaction'] == "1") { echo "checked='checked'"; } ?> type='radio' name='paymentaction' value='1'>
+                                                <input <?php if (esc_attr($options['paymentaction']) == "1") { echo "checked='checked'"; } ?> type='radio' name='paymentaction' value='1'>
                                                 <?php _e( 'Sale (Default)', 'wp-ecommerce-paypal' ); ?>
                                             </label>
                                             &nbsp;
                                             &nbsp;
                                             <label>
-                                                <input <?php if ($options['paymentaction'] == "2") { echo "checked='checked'"; } ?> type='radio' name='paymentaction' value='2'>
-                                                <?php _e( 'Authorize', 'wp-ecommerce-paypal' ); ?> (<?php _e( 'Learn more', 'wp-ecommerce-paypal' ); ?> <a target='_blank' href='https://developer.paypal.com/docs/checkout/standard/customize/authorization/'>here</a>)
+                                                <input <?php if (esc_attr($options['paymentaction']) == "2") { echo "checked='checked'"; } ?> type='radio' name='paymentaction' value='2'>
+                                                <?php _e( 'Authorize', 'wp-ecommerce-paypal' ); ?> (<?php _e( 'Learn more', 'wp-ecommerce-paypal' ); ?> <a target='_blank' href='<?php echo esc_url('https://developer.paypal.com/docs/checkout/standard/customize/authorization/'); ?>'>here</a>)
                                             </label>
                                         </td>
                                     </tr>
@@ -413,12 +413,12 @@ function wpecpp_settings_page() {
                                         </td>
                                         <td>
                                             <label>
-                                                <input type='radio' name='mode_stripe' value='1' <?php echo ( $options['mode_stripe'] != '2' ) ? 'checked' : ''; ?> onclick="autoSubmitModeChange(event)" />
+                                                <input type='radio' name='mode_stripe' value='1' <?php echo (esc_attr($options['mode_stripe']) != '2') ? 'checked' : ''; ?> onclick="autoSubmitModeChange(event)" />
                                                 <?php _e( 'On (Sandbox mode)', 'wp-ecommerce-paypal' ); ?>
                                             </label>
                                             &nbsp; &nbsp;
                                             <label>
-                                                <input type='radio' name='mode_stripe' value='2' <?php echo ( $options['mode_stripe'] == '2' ) ? 'checked' : ''; ?> onclick="autoSubmitModeChange(event)" />
+                                                <input type='radio' name='mode_stripe' value='2' <?php echo (esc_attr($options['mode_stripe']) == '2') ? 'checked' : ''; ?> onclick="autoSubmitModeChange(event)" />
                                                 <?php _e( 'Off (Live mode)', 'wp-ecommerce-paypal' ); ?>
                                             </label>
                                         </td>
@@ -429,12 +429,12 @@ function wpecpp_settings_page() {
                                         </td>
                                         <td>
                                             <label>
-                                                <input <?php if ($options['disable_stripe'] == "1") { echo "checked='checked'"; } ?> type='radio' name='disable_stripe' value='1'>
+                                                <input <?php if (esc_attr($options['disable_stripe']) == "1") { echo "checked='checked'"; } ?> type='radio' name='disable_stripe' value='1'>
                                                 <?php _e( 'No', 'wp-ecommerce-paypal' ); ?>
                                             </label>
                                             &nbsp; &nbsp;
                                             <label>
-                                                <input <?php if ($options['disable_stripe'] == "2") { echo "checked='checked'"; } ?> type='radio' name='disable_stripe' value='2'>
+                                                <input <?php if (esc_attr($options['disable_stripe']) == "2") { echo "checked='checked'"; } ?> type='radio' name='disable_stripe' value='2'>
                                                 <?php _e( 'Yes', 'wp-ecommerce-paypal' ); ?>
                                             </label>
                                         </td>
@@ -461,12 +461,12 @@ function wpecpp_settings_page() {
                                         </td>
                                         <td>
                                             <label>
-                                                <input <?php if ($options['opens'] == "1") { echo "checked='checked'"; } ?>  type='radio' name='opens' value='1'>
+                                                <input <?php if (esc_attr($options['opens']) == "1") { echo "checked='checked'"; } ?>  type='radio' name='opens' value='1'>
                                                 <?php _e( 'Same window', 'wp-ecommerce-paypal' ); ?>
                                             </label>
                                             &nbsp; &nbsp;
                                             <label>
-                                                <input <?php if ($options['opens'] == "2") { echo "checked='checked'"; } ?> type='radio' name='opens' value='2'>
+                                                <input <?php if (esc_attr($options['opens']) == "2") { echo "checked='checked'"; } ?> type='radio' name='opens' value='2'>
                                                 <?php _e( 'New window', 'wp-ecommerce-paypal' ); ?>
                                             </label>
                                         </td>
@@ -487,7 +487,7 @@ function wpecpp_settings_page() {
                                             <b><?php _e( 'Default Cancel URL:', 'wp-ecommerce-paypal' ); ?></b>
                                         </td>
                                         <td>
-                                            <input type='text' name='cancel' value='<?php echo $options['cancel']; ?>'> <?php _e( 'Optional', 'wp-ecommerce-paypal' ); ?>
+                                            <input type='text' name='cancel' value='<?php echo esc_attr($options['cancel']); ?>'> <?php _e( 'Optional', 'wp-ecommerce-paypal' ); ?>
                                         </td>
                                     </tr>
                                     <tr>
@@ -501,7 +501,7 @@ function wpecpp_settings_page() {
                                             <b><?php _e( 'Default Return URL:', 'wp-ecommerce-paypal' ); ?></b>
                                         </td>
                                         <td>
-                                            <input type='text' name='return' value='<?php echo $options['return']; ?>'> <?php _e( 'Optional', 'wp-ecommerce-paypal' ); ?>
+                                            <input type='text' name='return' value='<?php echo esc_attr($options['return']); ?>'> <?php _e( 'Optional', 'wp-ecommerce-paypal' ); ?>
                                         </td>
                                     </tr>
                                     <tr>
@@ -538,12 +538,12 @@ function wpecpp_settings_page() {
 	                                        ?>
                                             <select name="address" id="address">
 		                                        <?php if ( !empty( $options['liveaccount'] ) || !empty( $options['sandboxaccount'] ) ) { ?>
-                                                    <option value="0" <?php if ($options['address'] == "0") { echo "SELECTED"; } ?>><?php _e( 'Prompt for an address, but do not require one (default)', 'wp-ecommerce-paypal' ); ?></option>
-                                                    <option value="1" <?php if ($options['address'] == "1") { echo "SELECTED"; } ?>><?php _e( 'Do not prompt for an address', 'wp-ecommerce-paypal' ); ?></option>
-                                                    <option value="2" <?php if ($options['address'] == "2") { echo "SELECTED"; } ?>><?php _e( 'Prompt for an address, and require one', 'wp-ecommerce-paypal' ); ?></option>
+                                                    <option value="0" <?php if (esc_attr($options['address']) == "0") { echo "SELECTED"; } ?>><?php _e( 'Prompt for an address, but do not require one (default)', 'wp-ecommerce-paypal' ); ?></option>
+                                                    <option value="1" <?php if (esc_attr($options['address']) == "1") { echo "SELECTED"; } ?>><?php _e( 'Do not prompt for an address', 'wp-ecommerce-paypal' ); ?></option>
+                                                    <option value="2" <?php if (esc_attr($options['address']) == "2") { echo "SELECTED"; } ?>><?php _e( 'Prompt for an address, and require one', 'wp-ecommerce-paypal' ); ?></option>
 		                                        <?php } else { ?>
-                                                    <option value="1" <?php if ($options['address'] == "1") { echo "SELECTED"; } ?>><?php _e( 'Do not prompt for an address', 'wp-ecommerce-paypal' ); ?></option>
-                                                    <option value="2" <?php if ( in_array( $options['address'], ['0', '2'] ) ) { echo "SELECTED"; } ?>><?php _e( 'Prompt for an address, and require one', 'wp-ecommerce-paypal' ); ?></option>
+                                                    <option value="1" <?php if (esc_attr($options['address']) == "1") { echo "SELECTED"; } ?>><?php _e( 'Do not prompt for an address', 'wp-ecommerce-paypal' ); ?></option>
+                                                    <option value="2" <?php if (in_array(esc_attr($options['address']), ['0', '2'])) { echo "SELECTED"; } ?>><?php _e( 'Prompt for an address, and require one', 'wp-ecommerce-paypal' ); ?></option>
 		                                        <?php } ?>
                                             </select>
                                         </td>
@@ -575,7 +575,7 @@ function wpecpp_settings_page() {
                             <div class="dashicons dashicons-yes" style="margin-bottom: 6px;"></div><?php _e( 'Fast & Professional Support', 'wp-ecommerce-paypal' ); ?><br />
 
                             <center><p style="font-size: 14px; color: #666; margin-bottom: 10px;"><?php _e( 'Developed by an official PayPal and Stripe Partner', 'wp-ecommerce-paypal' ); ?></p></center>
-                            <center><a target='_blank' href="https://wpplugin.org/downloads/easy-paypal-buy-now-button/" class='button-primary' style='font-size: 17px;line-height: 28px;height: 32px;'><?php _e( 'Learn More', 'wp-ecommerce-paypal' ); ?></a></center>
+                            <center><a target='_blank' href="<?php echo esc_url('https://wpplugin.org/downloads/easy-paypal-buy-now-button/'); ?>" class='button-primary' style='font-size: 17px;line-height: 28px;height: 32px;'><?php _e( 'Learn More', 'wp-ecommerce-paypal' ); ?></a></center>
                             <br />
                         </div>
                         <br />
@@ -585,9 +585,9 @@ function wpecpp_settings_page() {
                         </div>
                         <div style="background-color:#fff;border: 1px solid #CCC;padding:8px;">
                             <br />
-                            <div class="dashicons dashicons-arrow-right" style="margin-bottom: 6px;"></div> <a target="_blank" href="https://wordpress.org/support/plugin/wp-ecommerce-paypal"><?php _e( 'Support Forum', 'wp-ecommerce-paypal' ); ?></a> <br />
-                            <div class="dashicons dashicons-arrow-right" style="margin-bottom: 6px;"></div> <a target="_blank" href="https://wpplugin.org/documentation/"><?php _e( 'FAQ', 'wp-ecommerce-paypal' ); ?></a> <br />
-                            <div class="dashicons dashicons-arrow-right" style="margin-bottom: 6px;"></div> <a target="_blank" href="https://wpplugin.org/downloads/easy-paypal-buy-now-button/"><?php _e( 'PayPal Button Pro', 'wp-ecommerce-paypal' ); ?></a> <br />
+                            <div class="dashicons dashicons-arrow-right" style="margin-bottom: 6px;"></div> <a target="_blank" href="<?php echo esc_url('https://wordpress.org/support/plugin/wp-ecommerce-paypal'); ?>"><?php _e( 'Support Forum', 'wp-ecommerce-paypal' ); ?></a> <br />
+                            <div class="dashicons dashicons-arrow-right" style="margin-bottom: 6px;"></div> <a target="_blank" href="<?php echo esc_url('https://wpplugin.org/documentation/'); ?>"><?php _e( 'FAQ', 'wp-ecommerce-paypal' ); ?></a> <br />
+                            <div class="dashicons dashicons-arrow-right" style="margin-bottom: 6px;"></div> <a target="_blank" href="<?php echo esc_url('https://wpplugin.org/downloads/easy-paypal-buy-now-button/'); ?>"><?php _e( 'PayPal Button Pro', 'wp-ecommerce-paypal' ); ?></a> <br />
                         </div>
                     </td>
                 </tr>
@@ -625,21 +625,21 @@ function wpecpp_ppcp_status_markup() {
                         <b><?php _e( 'Connection status:', 'wp-ecommerce-paypal' ); ?></b>
                     </td>
                     <td>
-                        <div class="notice inline notice-<?php echo $notice_type; ?>">
+                        <div class="notice inline notice-<?php echo esc_attr($notice_type); ?>">
                             <p>
                                 <?php if ( !empty( $status['legal_name'] ) ) { ?>
-                                <strong><?php echo $status['legal_name']; ?></strong>
+                                <strong><?php echo esc_html($status['legal_name']); ?></strong>
                                 <br>
                                 <?php } ?>
-	                            <?php echo !empty( $status['primary_email'] ) ? $status['primary_email'] . ' — ' : ''; ?><?php _e( 'Administrator (Owner)', 'wp-ecommerce-paypal' ); ?>
+	                            <?php echo !empty( $status['primary_email'] ) ? esc_html($status['primary_email']) . ' — ' : ''; ?><?php _e( 'Administrator (Owner)', 'wp-ecommerce-paypal' ); ?>
                             </p>
                             <p><?php _e( 'Pay as you go pricing: 2% per-transaction fee + PayPal fees.', 'wp-ecommerce-paypal' ); ?></p>
                         </div>
                         <div>
                             <?php $reconnect_mode = $status['env'] === 'live' ? 'sandbox' : 'live'; ?>
-                            <?php _e( 'Your PayPal account is connected in', 'wp-ecommerce-paypal' ); ?> <strong><?php echo $status['env']; ?></strong> <?php _e( 'mode.', 'wp-ecommerce-paypal' ); ?>
-                            <a href="#TB_inline?&inlineId=ppcp-setup-account-modal" class="ppcp-onboarding-start thickbox" data-connect-mode="<?php echo $reconnect_mode; ?>">
-                                <?php _e( 'Connect in', 'wp-ecommerce-paypal' ); ?> <strong><?php echo $reconnect_mode; ?></strong> <?php _e( 'mode', 'wp-ecommerce-paypal' ); ?>
+                            <?php _e( 'Your PayPal account is connected in', 'wp-ecommerce-paypal' ); ?> <strong><?php echo esc_html($status['env']); ?></strong> <?php _e( 'mode.', 'wp-ecommerce-paypal' ); ?>
+                            <a href="#TB_inline?&inlineId=ppcp-setup-account-modal" class="ppcp-onboarding-start thickbox" data-connect-mode="<?php echo esc_attr($reconnect_mode); ?>">
+                                <?php _e( 'Connect in', 'wp-ecommerce-paypal' ); ?> <strong><?php echo esc_html($reconnect_mode); ?></strong> <?php _e( 'mode', 'wp-ecommerce-paypal' ); ?>
                             </a> <?php _e( 'or', 'wp-ecommerce-paypal' ); ?> <a href="#" id="ppcp-disconnect"><?php _e( 'disconnect this account', 'wp-ecommerce-paypal' ); ?></a>.
                         </div>
 
@@ -653,7 +653,7 @@ function wpecpp_ppcp_status_markup() {
                                 </p>
                                 <ul class="ppcp-list ppcp-list-error">
                                     <?php foreach ( $status['errors'] as $error ) { ?>
-                                        <li><?php echo $error; ?></li>
+                                        <li><?php echo esc_html($error); ?></li>
                                     <?php } ?>
                                 </ul>
                             <?php } ?>
@@ -663,15 +663,15 @@ function wpecpp_ppcp_status_markup() {
                             </p>
                             <ul class="ppcp-list ppcp-list-warning">
 		                        <?php foreach ( $status['warnings'] as $warning ) { ?>
-                                    <li><?php echo $warning; ?></li>
+                                    <li><?php echo esc_html($warning); ?></li>
 		                        <?php } ?>
                             </ul>
                         <?php } ?>
 
 	                    <?php if ( $show_links ) { ?>
                             <ul class="ppcp-list">
-                                <li><a href="https://www.paypal.com/myaccount/settings/"><?php _e( 'PayPal account settings', 'wp-ecommerce-paypal' ); ?></a></li>
-                                <li><a href="https://www.paypal.com/us/smarthelp/contact-us"><?php _e( 'PayPal support', 'wp-ecommerce-paypal' ); ?></a></li>
+                                <li><a href="<?php echo esc_url('https://www.paypal.com/myaccount/settings/'); ?>"><?php _e( 'PayPal account settings', 'wp-ecommerce-paypal' ); ?></a></li>
+                                <li><a href="<?php echo esc_url('https://www.paypal.com/us/smarthelp/contact-us'); ?>"><?php _e( 'PayPal support', 'wp-ecommerce-paypal' ); ?></a></li>
                             </ul>
 	                    <?php } ?>
                     </td>
@@ -795,7 +795,7 @@ function wpecpp_ppcp_status_markup() {
                             <b><?php _e( 'ACDC Button text:', 'wp-ecommerce-paypal' ); ?></b>
                         </td>
                         <td>
-                            <input type="text" name="ppcp_acdc_button_text" value="<?php echo $options['ppcp_acdc_button_text']; ?>" />
+                            <input type="text" name="ppcp_acdc_button_text" value="<?php echo esc_attr($options['ppcp_acdc_button_text']); ?>" />
                             <br />
                             <?php _e( 'Payment button text', 'wp-ecommerce-paypal' ); ?>
                         </td>
@@ -814,13 +814,13 @@ function wpecpp_ppcp_status_markup() {
                         </td>
                         <td>
                             <label>
-                                <input type="radio" name="ppcp_layout" value="horizontal" <?php echo $options['ppcp_layout'] === 'horizontal' ? 'checked ' : ''; ?>/>
+                                <input type="radio" name="ppcp_layout" value="horizontal" <?php echo esc_attr($options['ppcp_layout']) === 'horizontal' ? 'checked ' : ''; ?>/>
                                 <?php _e( 'Horizontal', 'wp-ecommerce-paypal' ); ?>
                             </label>
                             &nbsp;
                             &nbsp;
                             <label>
-                                <input type="radio" name="ppcp_layout" value="vertical" <?php echo $options['ppcp_layout'] === 'vertical' ? 'checked ' : ''; ?>/>
+                                <input type="radio" name="ppcp_layout" value="vertical" <?php echo esc_attr($options['ppcp_layout']) === 'vertical' ? 'checked ' : ''; ?>/>
                                 <?php _e( 'Vertical', 'wp-ecommerce-paypal' ); ?>
                             </label>
                         </td>
@@ -831,31 +831,31 @@ function wpecpp_ppcp_status_markup() {
                         </td>
                         <td>
                             <label>
-                                <input type="radio" name="ppcp_color" value="gold" <?php echo $options['ppcp_color'] === 'gold' ? 'checked ' : ''; ?>/>
+                                <input type="radio" name="ppcp_color" value="gold" <?php echo esc_attr($options['ppcp_color']) === 'gold' ? 'checked ' : ''; ?>/>
                                 <?php _e( 'Gold', 'wp-ecommerce-paypal' ); ?>
                             </label>
                             &nbsp;
                             &nbsp;
                             <label>
-                                <input type="radio" name="ppcp_color" value="blue" <?php echo $options['ppcp_color'] === 'blue' ? 'checked ' : ''; ?>/>
+                                <input type="radio" name="ppcp_color" value="blue" <?php echo esc_attr($options['ppcp_color']) === 'blue' ? 'checked ' : ''; ?>/>
                                 <?php _e( 'Blue', 'wp-ecommerce-paypal' ); ?>
                             </label>
                             &nbsp;
                             &nbsp;
                             <label>
-                                <input type="radio" name="ppcp_color" value="black" <?php echo $options['ppcp_color'] === 'black' ? 'checked ' : ''; ?>/>
+                                <input type="radio" name="ppcp_color" value="black" <?php echo esc_attr($options['ppcp_color']) === 'black' ? 'checked ' : ''; ?>/>
                                 <?php _e( 'Black', 'wp-ecommerce-paypal' ); ?>
                             </label>
                             &nbsp;
                             &nbsp;
                             <label>
-                                <input type="radio" name="ppcp_color" value="silver" <?php echo $options['ppcp_color'] === 'silver' ? 'checked ' : ''; ?>/>
+                                <input type="radio" name="ppcp_color" value="silver" <?php echo esc_attr($options['ppcp_color']) === 'silver' ? 'checked ' : ''; ?>/>
                                 <?php _e( 'Silver', 'wp-ecommerce-paypal' ); ?>
                             </label>
                             &nbsp;
                             &nbsp;
                             <label>
-                                <input type="radio" name="ppcp_color" value="white" <?php echo $options['ppcp_color'] === 'white' ? 'checked ' : ''; ?>/>
+                                <input type="radio" name="ppcp_color" value="white" <?php echo esc_attr($options['ppcp_color']) === 'white' ? 'checked ' : ''; ?>/>
                                 <?php _e( 'White', 'wp-ecommerce-paypal' ); ?>
                             </label>
                         </td>
@@ -866,13 +866,13 @@ function wpecpp_ppcp_status_markup() {
                         </td>
                         <td>
                             <label>
-                                <input type="radio" name="ppcp_shape" value="rect" <?php echo $options['ppcp_shape'] === 'rect' ? 'checked ' : ''; ?>/>
+                                <input type="radio" name="ppcp_shape" value="rect" <?php echo esc_attr($options['ppcp_shape']) === 'rect' ? 'checked ' : ''; ?>/>
                                 <?php _e( 'Rectangle', 'wp-ecommerce-paypal' ); ?>
                             </label>
                             &nbsp;
                             &nbsp;
                             <label>
-                                <input type="radio" name="ppcp_shape" value="pill" <?php echo $options['ppcp_shape'] === 'pill' ? 'checked ' : ''; ?>/>
+                                <input type="radio" name="ppcp_shape" value="pill" <?php echo esc_attr($options['ppcp_shape']) === 'pill' ? 'checked ' : ''; ?>/>
                                 <?php _e( 'Pill', 'wp-ecommerce-paypal' ); ?>
                             </label>
                         </td>
@@ -883,31 +883,31 @@ function wpecpp_ppcp_status_markup() {
                         </td>
                         <td>
                             <label>
-                                <input type="radio" name="ppcp_label" value="paypal" <?php echo $options['ppcp_label'] === 'paypal' ? 'checked ' : ''; ?>/>
+                                <input type="radio" name="ppcp_label" value="paypal" <?php echo esc_attr($options['ppcp_label']) === 'paypal' ? 'checked ' : ''; ?>/>
                                 <?php _e( 'PayPal', 'wp-ecommerce-paypal' ); ?>
                             </label>
                             &nbsp;
                             &nbsp;
                             <label>
-                                <input type="radio" name="ppcp_label" value="pay" <?php echo $options['ppcp_label'] === 'pay' ? 'checked ' : ''; ?>/>
+                                <input type="radio" name="ppcp_label" value="pay" <?php echo esc_attr($options['ppcp_label']) === 'pay' ? 'checked ' : ''; ?>/>
                                 <?php _e( 'Pay with', 'wp-ecommerce-paypal' ); ?>
                             </label>
                             &nbsp;
                             &nbsp;
                             <label>
-                                <input type="radio" name="ppcp_label" value="subscribe" <?php echo $options['ppcp_label'] === 'subscribe' ? 'checked ' : ''; ?>/>
+                                <input type="radio" name="ppcp_label" value="subscribe" <?php echo esc_attr($options['ppcp_label']) === 'subscribe' ? 'checked ' : ''; ?>/>
                                 <?php _e( 'Subscribe', 'wp-ecommerce-paypal' ); ?>
                             </label>
                             &nbsp;
                             &nbsp;
                             <label>
-                                <input type="radio" name="ppcp_label" value="checkout" <?php echo $options['ppcp_label'] === 'checkout' ? 'checked ' : ''; ?>/>
+                                <input type="radio" name="ppcp_label" value="checkout" <?php echo esc_attr($options['ppcp_label']) === 'checkout' ? 'checked ' : ''; ?>/>
                                 <?php _e( 'Checkout', 'wp-ecommerce-paypal' ); ?>
                             </label>
                             &nbsp;
                             &nbsp;
                             <label>
-                                <input type="radio" name="ppcp_label" value="buynow" <?php echo $options['ppcp_label'] === 'buynow' ? 'checked ' : ''; ?>/>
+                                <input type="radio" name="ppcp_label" value="buynow" <?php echo esc_attr($options['ppcp_label']) === 'buynow' ? 'checked ' : ''; ?>/>
                                 <?php _e( 'Buy Now', 'wp-ecommerce-paypal' ); ?>
                             </label>
                         </td>
@@ -922,7 +922,7 @@ function wpecpp_ppcp_status_markup() {
                             <b><?php _e( 'Height:', 'wp-ecommerce-paypal' ); ?></b>
                         </td>
                         <td>
-                            <input type="number" name="ppcp_height" value="<?php echo $options['ppcp_height']; ?>" min="25" max="55" />
+                            <input type="number" name="ppcp_height" value="<?php echo esc_attr($options['ppcp_height']); ?>" min="25" max="55" />
                             <br />
                             <?php _e( '25 - 55, a value around 40 is recommended', 'wp-ecommerce-paypal' ); ?>
                         </td>
@@ -937,7 +937,7 @@ function wpecpp_ppcp_status_markup() {
                             <b><?php _e( 'Width:', 'wp-ecommerce-paypal' ); ?></b>
                         </td>
                         <td>
-                            <input type="number" name="ppcp_width" value="<?php echo $options['ppcp_width']; ?>" />
+                            <input type="number" name="ppcp_width" value="<?php echo esc_attr($options['ppcp_width']); ?>" />
                             <br />
                             <?php _e( 'Max buttons width in pixels', 'wp-ecommerce-paypal' ); ?>
                         </td>
@@ -951,11 +951,11 @@ function wpecpp_ppcp_status_markup() {
         <table id="ppcp-status-table" class="ppcp-initial-view-table">
             <tr>
                 <td>
-                    <img class="ppcp-paypal-logo" src="<?php echo WPECPP_FREE_URL; ?>assets/images/paypal-logo.png" alt="paypal-logo" />
+                    <img class="ppcp-paypal-logo" src="<?php echo esc_url(WPECPP_FREE_URL . 'assets/images/paypal-logo.png'); ?>" alt="paypal-logo" />
                 </td>
                 <td class="ppcp-align-right ppcp-icons">
-                    <img class="ppcp-paypal-methods" src="<?php echo WPECPP_FREE_URL; ?>assets/images/paypal-express.png" alt="paypal-expresss" />
-                    <img class="ppcp-paypal-methods" src="<?php echo WPECPP_FREE_URL; ?>assets/images/paypal-advanced.png" alt="paypal-advanced" />
+                    <img class="ppcp-paypal-methods" src="<?php echo esc_url(WPECPP_FREE_URL . 'assets/images/paypal-express.png'); ?>" alt="paypal-expresss" />
+                    <img class="ppcp-paypal-methods" src="<?php echo esc_url(WPECPP_FREE_URL . 'assets/images/paypal-advanced.png'); ?>" alt="paypal-advanced" />
                 </td>
             </tr>
             <tr>
@@ -970,7 +970,7 @@ function wpecpp_ppcp_status_markup() {
             </tr>
             <tr>
                 <td>
-                    <a href="#TB_inline?&inlineId=ppcp-setup-account-modal" class="ppcp-button ppcp-onboarding-start thickbox" data-connect-mode="<?php echo $options['mode'] == 1 ? 'sandbox' : 'live'; ?>"><?php _e( 'Get started', 'wp-ecommerce-paypal' ); ?></a>
+                    <a href="#TB_inline?&inlineId=ppcp-setup-account-modal" class="ppcp-button ppcp-onboarding-start thickbox" data-connect-mode="<?php echo esc_attr($options['mode'] == 1 ? 'sandbox' : 'live'); ?>"><?php _e( 'Get started', 'wp-ecommerce-paypal' ); ?></a>
                 </td>
                 <td class="ppcp-align-right">
                     <a href="https://www.paypal.com/us/webapps/mpp/merchant-fees#statement-2" class="ppcp-link" target="_blank"><?php _e( 'View our simple and transparent pricing', 'wp-ecommerce-paypal' ); ?></a>
@@ -1005,13 +1005,13 @@ function wpecpp_ppcp_status_markup() {
 
                 <div class="ppcp-field ppcp-checkbox-field">
                     <label class="ppcp-readonly">
-                        <input type="checkbox" id="ppcp-accept-paypal" checked disabled /> <span class="ppcp-cb-view"></span><img src="<?php echo WPECPP_FREE_URL; ?>assets/images/paypal-accept-paypal.png" alt="paypal-accept-paypal" /> <?php _e( 'Accept PayPal', 'wp-ecommerce-paypal' ); ?>
+                        <input type="checkbox" id="ppcp-accept-paypal" checked disabled /> <span class="ppcp-cb-view"></span><img src="<?php echo esc_url(WPECPP_FREE_URL . 'assets/images/paypal-accept-paypal.png'); ?>" alt="paypal-accept-paypal" /> <?php _e( 'Accept PayPal', 'wp-ecommerce-paypal' ); ?>
                     </label>
                 </div>
 
                 <div class="ppcp-field ppcp-checkbox-field">
                     <label data-title="<?php _e( 'PayPal does not currently support PayPal Advanced Card Payments in your country.', 'wp-ecommerce-paypal' ); ?>">
-                        <input type="checkbox" id="ppcp-accept-cards" /> <span class="ppcp-cb-view"></span> <img src="<?php echo WPECPP_FREE_URL; ?>assets/images/paypal-accept-cards.png" alt="paypal-accept-cards" /> <?php _e( 'Accept Credit and Debit Card Payments with PayPal', 'wp-ecommerce-paypal' ); ?>
+                        <input type="checkbox" id="ppcp-accept-cards" /> <span class="ppcp-cb-view"></span> <img src="<?php echo esc_url(WPECPP_FREE_URL . 'assets/images/paypal-accept-cards.png'); ?>" alt="paypal-accept-cards" /> <?php _e( 'Accept Credit and Debit Card Payments with PayPal', 'wp-ecommerce-paypal' ); ?>
                     </label>
                     <div class="ppcp-checkbox-note">* <?php _e( 'Direct Credit Card option will require a PayPal Business account and additional vetting.', 'wp-ecommerce-paypal' ); ?></div>
                 </div>
@@ -1036,14 +1036,14 @@ function wpecpp_ppcp_status_markup() {
                             id="ppcp-onboarding-start-btn"
                             class="ppcp-button"
                             data-paypal-button="true"
-                            href="<?php echo add_query_arg(
+                            href="<?php echo esc_url(add_query_arg(
 								[
 									'action' => 'wpecpp-ppcp-onboarding-start',
-									'nonce' => wp_create_nonce( 'ppcp-onboarding-start' ),
+									'nonce' => wp_create_nonce('ppcp-onboarding-start'),
 									'country' => 'US'
 								],
-								admin_url( 'admin-ajax.php' )
-							); ?>"
+								admin_url('admin-ajax.php')
+							)); ?>"
                             target="PPFrame"
                     ><?php _e( 'Connect', 'wp-ecommerce-paypal' ); ?></a>
                     <button id="ppcp-setup-account-close-btn" class="ppcp-button ppcp-button-white"><?php _e( 'Cancel', 'wp-ecommerce-paypal' ); ?></button>
