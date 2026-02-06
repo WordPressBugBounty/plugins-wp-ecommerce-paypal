@@ -8,12 +8,12 @@ Tags: PayPal payment, PayPal, button, payment, online payments, pay now, buy now
 Author: Scott Paterson
 Author URI: https://wpplugin.org
 License: GPL2
-Version: 2.0.1
+Version: 2.0.4
 Text Domain: wp-ecommerce-paypal
 Domain Path: /languages
 */
 
-/*  Copyright 2014-2025 Scott Paterson
+/*  Copyright 2014-2026 Scott Paterson
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ function wpecpp_load_textdomain() {
 }
 add_action('plugins_loaded', 'wpecpp_load_textdomain');
 
-define( 'WPECPP_FREE_VERSION_NUM', '2.0.1' );
+define( 'WPECPP_FREE_VERSION_NUM', '2.0.4' );
 
 define( 'WPECPP_FREE_STRIPE_CONNECT_ENDPOINT', 'https://wpplugin.org/stripe-wpecpp/connect.php' );
 define( 'WPECPP_FREE_PPCP_API', 'https://wpplugin.org/ppcp-wpecpp/' );

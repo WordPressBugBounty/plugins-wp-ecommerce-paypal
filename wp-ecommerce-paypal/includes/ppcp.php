@@ -28,7 +28,9 @@ function wpecpp_ppcp_status() {
 					$wpecppPpcpStatus = $data;
 				}
 			}
-		} elseif ( !empty( $onboarding ) ) {
+
+		} elseif ( !empty( $onboarding ) && !empty( $onboarding['tracking_id'] ) ) {
+
 			$response = wp_remote_get( WPECPP_FREE_PPCP_API . 'find-seller-id?' . http_build_query( [
                 'env' => $env,
                 'onboarding' => $onboarding

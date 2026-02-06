@@ -181,30 +181,43 @@ function wpecpp_ppcp_html( $connection_data, $rand_string ) {
     $sdk_url = add_query_arg( $sdk_attr, 'https://www.paypal.com/sdk/js' );
 
     ob_start();
-
-    if ( !defined( 'PPCP_JS_SDK_LOADED' ) ) {
+    
+    $sdk_attr_hash = md5( json_encode( $sdk_attr ) );
     ?>
-        <script
-            src='<?php echo $sdk_url; ?>'
-            data-partner-attribution-id='<?php echo $connection_data['bn_code']; ?>'
-		    <?php if ( !empty( $connection_data['advanced_cards'] ) ) { echo 'data-client-token="' . $connection_data['client_token'] . '"'; } ?>
-        ></script>
-        <style>
-            .wpecpp-paypal-button-container > *,
-            .wpecpp-paypal-hosted-fields-container .wpecpp-paypal-btn {
-                max-width: <?php echo $connection_data['width']; ?>px;
-            }
-            .wpecpp-paypal-hosted-fields-container .wpecpp-paypal-btn {
-                height: <?php echo $connection_data['height']; ?>px;
-            }
-        </style>
-        <script>
-            const wpecppPaypalFunding = <?php echo $wpecpp_paypal_funding; ?>;
-        </script>
-    <?php
-	    define( 'PPCP_JS_SDK_LOADED', 1 );
-    }
-    ?>
+    
+    <!-- PayPal SDK Loader with DOM check -->
+    <script>
+    (function() {
+        var sdkId = 'wpecpp-paypal-sdk-<?php echo $sdk_attr_hash; ?>';
+        var sdkUrl = '<?php echo $sdk_url; ?>';
+        
+        // Check if SDK script already exists in DOM or is being loaded
+        if (!document.getElementById(sdkId)) {
+            var script = document.createElement('script');
+            script.id = sdkId;
+            script.src = sdkUrl;
+            script.setAttribute('data-partner-attribution-id', '<?php echo $connection_data['bn_code']; ?>');
+            <?php if ( !empty( $connection_data['advanced_cards'] ) ) { ?>
+            script.setAttribute('data-client-token', '<?php echo $connection_data['client_token']; ?>');
+            <?php } ?>
+            document.head.appendChild(script);
+        }
+    })();
+    </script>
+    
+    <style>
+        .wpecpp-paypal-button-container > *,
+        .wpecpp-paypal-hosted-fields-container .wpecpp-paypal-btn {
+            max-width: <?php echo $connection_data['width']; ?>px;
+        }
+        .wpecpp-paypal-hosted-fields-container .wpecpp-paypal-btn {
+            height: <?php echo $connection_data['height']; ?>px;
+        }
+    </style>
+    
+    <script>
+        const wpecppPaypalFunding_<?php echo $rand_string; ?> = <?php echo $wpecpp_paypal_funding; ?>;
+    </script>
 
     <!-- Buttons container -->
     <div id='wpecpp-paypal-button-container-<?php echo $rand_string; ?>' class='wpecpp-paypal-button-container wpecpp-<?php echo $connection_data['layout']; ?>'></div>
@@ -242,14 +255,22 @@ function wpecpp_ppcp_html( $connection_data, $rand_string ) {
     <div id='wpecpp-paypal-message-<?php echo $rand_string; ?>' class='wpecpp-payment-message'></div>
 
     <script>
-        const message_<?php echo $rand_string; ?> = document.getElementById('wpecpp-paypal-message-<?php echo $rand_string; ?>');
-        if ( typeof paypal === 'undefined' ) {
-            message_<?php echo $rand_string; ?>.innerHTML = '<span class="payment-error"><?php _e('An error occurred while connecting PayPal SDK. Check the plugin settings.', 'wp-ecommerce-paypal'); ?></span>';
-            throw '<?php _e('An error occurred while connecting PayPal SDK. Check the plugin settings.', 'wp-ecommerce-paypal'); ?>';
-        }
+        (function() {
+            const message_<?php echo $rand_string; ?> = document.getElementById('wpecpp-paypal-message-<?php echo $rand_string; ?>');
+            
+            // Wait for SDK to be fully loaded with polling
+            function initPayPalButton_<?php echo $rand_string; ?>() {
+                // Check if PayPal SDK is fully loaded with all required methods
+                if ( typeof paypal === 'undefined' || 
+                     typeof paypal.getFundingSources !== 'function' ||
+                     typeof paypal.Buttons !== 'function' ) {
+                    // SDK not loaded yet, wait and try again
+                    setTimeout(initPayPalButton_<?php echo $rand_string; ?>, 100);
+                    return;
+                }
 
         paypal.getFundingSources().forEach(function (fundingSource) {
-            if ( wpecppPaypalFunding.indexOf(fundingSource) > -1 ) {
+            if ( wpecppPaypalFunding_<?php echo $rand_string; ?>.indexOf(fundingSource) > -1 ) {
                 const style = {
                     shape: '<?php echo $connection_data['shape']; ?>',
                     label: '<?php echo $connection_data['label']; ?>',
@@ -315,7 +336,7 @@ function wpecpp_ppcp_html( $connection_data, $rand_string ) {
                             return response.json();
                         }).then(function(data) {
                             if (data.success) {
-                                if (wpecpp.return.length && fundingSource !== 'card') {
+                                if (wpecpp.return.length) {
                                     window.location.href = wpecpp.return;
                                 } else {
                                     message_<?php echo $rand_string; ?>.innerHTML = '<span class="payment-success">' + data.data.message + '</span>';
@@ -326,7 +347,7 @@ function wpecpp_ppcp_html( $connection_data, $rand_string ) {
                         });
                     },
                     onCancel: function() {
-                        if (wpecpp.cancel.length && fundingSource !== 'card') {
+                        if (wpecpp.cancel.length) {
                             window.location.href = wpecpp.cancel;
                         } else {
                             message_<?php echo $rand_string; ?>.innerHTML = '<span class="payment-error"><?php _e('The payment was cancelled.', 'wp-ecommerce-paypal'); ?></span>';
@@ -547,6 +568,11 @@ function wpecpp_ppcp_html( $connection_data, $rand_string ) {
             document.querySelector("#wpecpp-card-form-<?php echo $rand_string; ?>").style = 'display: none';
         }
         <?php } ?>
+            } // End initPayPalButton function
+            
+            // Start initialization (will poll until SDK is ready)
+            initPayPalButton_<?php echo $rand_string; ?>();
+        })(); // End IIFE
     </script>
     <?php
 
